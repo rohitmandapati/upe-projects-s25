@@ -1,9 +1,9 @@
-#UPE Intern Projects S25
+# UPE Intern Projects S25
 Home for the UPE Intern Projects for the Fall '24 intern class.
 
-##Structure
+## Structure
 This repo will contain everyone's projects, so projects should be in their own subfolders, e.g.
-'''
+''' 
 / (root)
 |-- grace
 |    | -- index.html
@@ -12,16 +12,16 @@ This repo will contain everyone's projects, so projects should be in their own s
 |    |    | -- grace_file_2.py
 |-- you
 |    | -- (your project files in here!)
-'''
+''' 
 
-##Contributing
+## Contributing
 To create a new project in this repo, follow these steps:
 
 Fork this repo to create your own copy.
 Clone your fork to your local machine.
 Locally:
 Create a new folder in the repo, named after you (or your project).
-Add a text file named 'README.md' to your subfolder.
+Add a text file named ' README.md ' to your subfolder.
 Put whatever info you want (for now) into that 'README.md'!
 e.g. "This is the folder for Grace's intern project!"
 Add your changes to git via 'git add .'
