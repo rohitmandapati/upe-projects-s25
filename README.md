@@ -21,7 +21,7 @@ Fork this repo to create your own copy.
 Clone your fork to your local machine.
 Locally:
 Create a new folder in the repo, named after you (or your project).
-Add a text file named ` README.md ` to your subfolder.
+Add a text file named `README.md` to your subfolder.
 Put whatever info you want (for now) into that 'README.md'!
 e.g. "This is the folder for Grace's intern project!"
 Add your changes to git via 'git add .'
