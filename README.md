@@ -17,8 +17,8 @@ This repo will contain everyone's projects, so projects should be in their own s
 ## Contributing
 To create a new project in this repo, follow these steps:
 
-Fork this repo to create your own copy.
-Clone your fork to your local machine.
+* Fork this repo to create your own copy.
+* Clone your fork to your local machine.
 Locally:
 Create a new folder in the repo, named after you (or your project).
 Add a text file named `README.md` to your subfolder.
