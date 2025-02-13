@@ -23,12 +23,12 @@ To create a new project in this repo, follow these steps:
   * Add a text file named `README.md` to your subfolder.
   * Put whatever info you want (for now) into that `README.md`!
     * e.g. "This is the folder for Grace's intern project!"
-  * _Add_ your changes to git via `git add .`
-  * _Commit_ your changes to git via `git commit -m `some message here..."`
-  * _Push_ your changes to GitHub via `git push`
-    * You'll probably have to log in to GitHub here
-  * You should now see the folder/files you created on GitHub!
-  * Open a pull request from your fork to the main repo.
+* _Add_ your changes to git via `git add .`
+* _Commit_ your changes to git via `git commit -m `some message here..."`
+* _Push_ your changes to GitHub via `git push`
+  * You'll probably have to log in to GitHub here
+* You should now see the folder/files you created on GitHub!
+* Open a pull request from your fork to the main repo.
 
 To update your project:  
 * Make sure to _sync_ your fork (on Github) and run `git pull` locally.
