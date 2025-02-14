@@ -1,5 +1,5 @@
 # UPE Intern Projects S25
-Home for the UPE Intern Projects for the Fall '24 intern class.
+Home for the UPE Intern Projects for the Spring '25 intern class.
 
 ## Structure
 This repo will contain everyone's projects, so projects should be in their own subfolders, e.g.
