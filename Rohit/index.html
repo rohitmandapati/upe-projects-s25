@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Setup</title>
+</head>
+<body>
+  <form id="gameSetupForm">
+    <label for="botCount">Number of Bots:</label>
+    <input type="number" id="botCount" name="botCount" min="1" value="3" required>
+    <br>
+    <label for="dicePerBot">Dice per Bot:</label>
+    <input type="number" id="dicePerBot" name="dicePerBot" min="1" value="5" required>
+    <br>
+    <button type="submit">Start Game</button>
+  </form>
+
+  <script>
+    document.getElementById('gameSetupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const botCount = parseInt(document.getElementById('botCount').value, 10);
+      const dicePerBot = parseInt(document.getElementById('dicePerBot').value, 10);
+      
+      // Send data to the Flask server
+      fetch('http://127.0.0.1:5000/setup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ botCount, dicePerBot })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Game initialized:', data);
+        // Update your game state on the client as needed.
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+</body>
+</html>
