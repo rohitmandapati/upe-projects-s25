@@ -5,6 +5,15 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # Enable CORS if your front-end is served from a different origin
 
+@app.route("/")
+def home():
+    return "server is running."
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+# TEMP WEBSITE PAGE
+
 @app.route('/setup', methods=['POST'])
 def setup_game():
     # Extract JSON data from the request
