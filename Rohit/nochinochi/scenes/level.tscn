@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://8t2snaruopsj"]
+[gd_scene load_steps=4 format=3 uid="uid://8t2snaruopsj"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_ypw4k"]
+[ext_resource type="Texture2D" uid="uid://jpa2d2dmvo7n" path="res://textures/dice-1.png" id="2_g0ks4"]
 
 [sub_resource type="GDScript" id="GDScript_ywn1s"]
 script/source = "extends Node2D
@@ -14,6 +15,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+# Called at the start of the round. Rolls a number of dice and returns the result.
+func _roll(num_dice: int) -> Array:
+	var result = []
+	for i in range(num_dice):
+		result.append(randi() % 6 + 1)
+	return result
 "
 
 [node name="Level" type="Node2D"]
@@ -24,4 +33,19 @@ scale = Vector2(3.95228, 3.23889)
 texture = ExtResource("1_ypw4k")
 
 [node name="Player" type="Node2D" parent="."]
+script = SubResource("GDScript_ywn1s")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_g0ks4")
+
+[node name="Bot 1" type="Node2D" parent="."]
+script = SubResource("GDScript_ywn1s")
+
+[node name="Bot 2" type="Node2D" parent="."]
+script = SubResource("GDScript_ywn1s")
+
+[node name="Bot 3" type="Node2D" parent="."]
+script = SubResource("GDScript_ywn1s")
+
+[node name="Bot 4" type="Node2D" parent="."]
 script = SubResource("GDScript_ywn1s")
