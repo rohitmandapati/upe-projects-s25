@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbgicuev16n53"]
+[gd_scene load_steps=6 format=3 uid="uid://cbgicuev16n53"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_4qmtk"]
+[ext_resource type="Script" path="res://scenes/scripts/start_button.gd" id="2_4ryk2"]
+[ext_resource type="Script" path="res://scenes/scripts/difficulty_choose.gd" id="2_b0083"]
+[ext_resource type="Texture2D" uid="uid://jpa2d2dmvo7n" path="res://textures/dice-1.png" id="3_yccag"]
+[ext_resource type="Texture2D" uid="uid://vt8meetpp7xr" path="res://textures/dice-4.png" id="4_5gspi"]
 
 [node name="game_start" type="Control"]
 layout_mode = 3
@@ -15,9 +19,7 @@ position = Vector2(963, 543.5)
 scale = Vector2(3.94715, 3.22287)
 texture = ExtResource("1_4qmtk")
 
-[node name="Sprite2D" type="Sprite2D" parent="Background"]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Welcome" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 149.0
 offset_top = 143.0
@@ -31,3 +33,58 @@ text = "Welcome to [b]Nochi Nochi![/b]
 "
 fit_content = true
 scroll_active = false
+
+[node name="Difficulty" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 1085.0
+offset_top = 391.0
+offset_right = 1554.0
+offset_bottom = 559.0
+theme_override_font_sizes/font_size = 100
+icon_alignment = 1
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Easy"
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+
+[node name="DifficultyChoose" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 220.0
+offset_right = 1768.0
+offset_bottom = 350.0
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]Choose your difficulty[/center]"
+scroll_active = false
+script = ExtResource("2_b0083")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1159.0
+offset_top = 608.0
+offset_right = 1477.0
+offset_bottom = 769.0
+theme_override_font_sizes/font_size = 80
+action_mode = 0
+text = "Start!"
+script = ExtResource("2_4ryk2")
+
+[node name="Dice-1" type="Sprite2D" parent="."]
+position = Vector2(523, 782)
+rotation = -0.296706
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_yccag")
+
+[node name="Dice-4" type="Sprite2D" parent="."]
+position = Vector2(305, 634)
+rotation = 0.380482
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_5gspi")
+
+[connection signal="item_focused" from="Difficulty" to="Button" method="_on_difficulty_item_focused"]
+[connection signal="please_select_diff" from="Button" to="DifficultyChoose" method="_on_button_please_select_diff"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
