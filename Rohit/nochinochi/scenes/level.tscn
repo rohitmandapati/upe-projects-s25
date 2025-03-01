@@ -1,7 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://8t2snaruopsj"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_ypw4k"]
-[ext_resource type="Script" path="res://scenes/player.gd" id="2_fcbox"]
+
+[sub_resource type="GDScript" id="GDScript_ywn1s"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="Level" type="Node2D"]
 
@@ -11,4 +24,4 @@ scale = Vector2(3.95228, 3.23889)
 texture = ExtResource("1_ypw4k")
 
 [node name="Player" type="Node2D" parent="."]
-script = ExtResource("2_fcbox")
+script = SubResource("GDScript_ywn1s")
