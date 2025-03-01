@@ -1,15 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://8t2snaruopsj"]
+[gd_scene load_steps=9 format=3 uid="uid://8t2snaruopsj"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_ypw4k"]
 [ext_resource type="Texture2D" uid="uid://jpa2d2dmvo7n" path="res://textures/dice-1.png" id="2_g0ks4"]
+[ext_resource type="Texture2D" uid="uid://cf8oo01sfhhgn" path="res://textures/dice-2.png" id="3_t5k3x"]
+[ext_resource type="Texture2D" uid="uid://cok2j8y4qmfhm" path="res://textures/dice-3.png" id="4_dvdrm"]
+[ext_resource type="Texture2D" uid="uid://vt8meetpp7xr" path="res://textures/dice-4.png" id="5_ka57g"]
+[ext_resource type="Texture2D" uid="uid://cbd0tqh3va40e" path="res://textures/dice-5.png" id="6_8b222"]
+[ext_resource type="Texture2D" uid="uid://dexlpxjnmkwf2" path="res://textures/dice-6.png" id="7_sqicm"]
 
 [sub_resource type="GDScript" id="GDScript_ywn1s"]
 script/source = "extends Node2D
 
 
+#initalizes dice face
+var dice_faces = []
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	for i in range(1, 7):  # Dice faces 1 to 6
+		dice_faces.append(load(\"res://assets/dice_%d.png\" % i))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,11 +28,20 @@ func _process(delta: float) -> void:
 
 
 # Called at the start of the round. Rolls a number of dice and returns the result.
-func _roll(num_dice: int) -> Array:
+func _roll(num_dice: int) -> void:
+	#clears previous visuals
+	for child in get_children():
+		if child is Sprite2D:
+			child.queue_free()
+
+#rolls dice and creates visuals
 	var result = []
 	for i in range(num_dice):
-		result.append(randi() % 6 + 1)
-	return result
+		var roll_result = randi() % 6 + 1
+		var sprite = Sprite2D.new()
+		sprite.texture = dice_faces[roll_result]
+		sprite.position = Vector2(50 + (i * 70), 100)
+		add_child(sprite)
 "
 
 [node name="Level" type="Node2D"]
@@ -35,8 +54,23 @@ texture = ExtResource("1_ypw4k")
 [node name="Player" type="Node2D" parent="."]
 script = SubResource("GDScript_ywn1s")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="dice-1" type="Sprite2D" parent="Player"]
 texture = ExtResource("2_g0ks4")
+
+[node name="dice-2" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_t5k3x")
+
+[node name="dice-3" type="Sprite2D" parent="Player"]
+texture = ExtResource("4_dvdrm")
+
+[node name="dice-4" type="Sprite2D" parent="Player"]
+texture = ExtResource("5_ka57g")
+
+[node name="dice-5" type="Sprite2D" parent="Player"]
+texture = ExtResource("6_8b222")
+
+[node name="dice-6" type="Sprite2D" parent="Player"]
+texture = ExtResource("7_sqicm")
 
 [node name="Bot 1" type="Node2D" parent="."]
 script = SubResource("GDScript_ywn1s")
