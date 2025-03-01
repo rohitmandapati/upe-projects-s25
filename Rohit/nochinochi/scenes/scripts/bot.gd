@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 
 #rolls dice for bot.
 func _botRoll(num_dice: int) -> Array:
-	var botResult = []
+	botResult.clear()
 	for i in range(num_dice):
 		botResult.append(randi() % 6 + 1)
 	return botResult 
@@ -44,3 +44,7 @@ func _showRoll(num_dice: int) -> void:
 		sprite.position = Vector2(450 + (i * 100), 950)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
+
+
+func _get_last_roll() -> Array:
+	return botResult
