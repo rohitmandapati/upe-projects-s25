@@ -14,7 +14,6 @@ func _ready() -> void: # Dice faces 1 to 6
 	dice_faces.append(load("res://textures/dice-4.png"))
 	dice_faces.append(load("res://textures/dice-5.png"))
 	dice_faces.append(load("res://textures/dice-6.png"))
-	_roll(6)
 		
 
 
@@ -26,7 +25,7 @@ func _process(delta: float) -> void:
 
 # Called at the start of the round. Rolls a number of dice and returns the result.
 func _roll(num_dice: int) -> void:
-	##clears previous visuals
+	#clears previous visuals
 	for child in get_children():
 		if child is Sprite2D:
 			child.queue_free()
@@ -40,6 +39,3 @@ func _roll(num_dice: int) -> void:
 		sprite.position = Vector2(725 + (i * 100), 950)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
-	
-	for i in result:
-		print(i)

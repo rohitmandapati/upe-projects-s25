@@ -41,6 +41,7 @@ offset_top = 391.0
 offset_right = 1554.0
 offset_bottom = 559.0
 theme_override_font_sizes/font_size = 100
+alignment = 1
 icon_alignment = 1
 allow_reselect = true
 item_count = 3

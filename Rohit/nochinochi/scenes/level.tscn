@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://8t2snaruopsj"]
+[gd_scene load_steps=11 format=3 uid="uid://8t2snaruopsj"]
 
+[ext_resource type="Script" path="res://scenes/scripts/level.gd" id="1_f614b"]
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_ypw4k"]
 [ext_resource type="Script" path="res://scenes/scripts/player.gd" id="2_7lb3r"]
 [ext_resource type="Texture2D" uid="uid://jpa2d2dmvo7n" path="res://textures/dice-1.png" id="2_g0ks4"]
@@ -8,8 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://vt8meetpp7xr" path="res://textures/dice-4.png" id="5_ka57g"]
 [ext_resource type="Texture2D" uid="uid://cbd0tqh3va40e" path="res://textures/dice-5.png" id="6_8b222"]
 [ext_resource type="Texture2D" uid="uid://dexlpxjnmkwf2" path="res://textures/dice-6.png" id="7_sqicm"]
+[ext_resource type="Script" path="res://scenes/scripts/bot.gd" id="9_hdx8y"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_f614b")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(962.74, 542.77)
@@ -42,3 +45,16 @@ texture = ExtResource("6_8b222")
 [node name="dice-6" type="Sprite2D" parent="Player"]
 visible = false
 texture = ExtResource("7_sqicm")
+
+[node name="Bot" type="Node2D" parent="."]
+script = ExtResource("9_hdx8y")
+
+[node name="RollButton" type="Button" parent="."]
+offset_left = 757.0
+offset_top = 426.0
+offset_right = 1182.0
+offset_bottom = 629.0
+theme_override_font_sizes/font_size = 80
+text = "Roll!"
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
