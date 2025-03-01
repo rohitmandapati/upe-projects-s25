@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbgicuev16n53"]
+
+[ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_4qmtk"]
+
+[node name="game_start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(963, 543.5)
+scale = Vector2(3.94715, 3.22287)
+texture = ExtResource("1_4qmtk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 143.0
+offset_right = 804.0
+offset_bottom = 432.0
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "Welcome to [b]Nochi Nochi![/b]
+"
+fit_content = true
+scroll_active = false
