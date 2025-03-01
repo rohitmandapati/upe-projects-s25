@@ -85,6 +85,6 @@ rotation = 0.380482
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_5gspi")
 
-[connection signal="item_focused" from="Difficulty" to="Button" method="_on_difficulty_item_focused"]
+[connection signal="item_selected" from="Difficulty" to="Button" method="_on_difficulty_item_selected"]
 [connection signal="please_select_diff" from="Button" to="DifficultyChoose" method="_on_button_please_select_diff"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
