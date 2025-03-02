@@ -87,10 +87,10 @@ text = "Dice Side"
 text_direction = 3
 
 [node name="SpinBox" type="SpinBox" parent="."]
-offset_left = 1141.0
-offset_top = 1648.0
-offset_right = 1340.0
-offset_bottom = 1784.0
+offset_left = 1145.0
+offset_top = 1647.0
+offset_right = 1338.0
+offset_bottom = 1781.0
 min_value = 1.0
 value = 1.0
 
@@ -102,5 +102,22 @@ offset_bottom = 1664.0
 theme_override_font_sizes/normal_font_size = 36
 text = "Amount"
 text_direction = 3
+
+[node name="Confirm" type="RichTextLabel" parent="."]
+offset_left = 1161.0
+offset_top = 1606.0
+offset_right = 1330.0
+offset_bottom = 1664.0
+theme_override_font_sizes/normal_font_size = 36
+text = "Amount"
+text_direction = 3
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1000.0
+offset_top = 1796.0
+offset_right = 1270.0
+offset_bottom = 1887.0
+theme_override_font_sizes/font_size = 60
+text = "Confirm"
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
