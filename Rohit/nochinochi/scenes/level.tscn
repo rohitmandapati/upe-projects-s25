@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://8t2snaruopsj"]
+[gd_scene load_steps=10 format=3 uid="uid://8t2snaruopsj"]
 
 [ext_resource type="Script" path="res://scenes/scripts/level.gd" id="1_f614b"]
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_ypw4k"]
 [ext_resource type="Script" path="res://scenes/scripts/player.gd" id="2_7lb3r"]
+[ext_resource type="Texture2D" uid="uid://b2a3gxmsufxnr" path="res://textures/green_square.png" id="9_4ct54"]
 [ext_resource type="Script" path="res://scenes/scripts/bot.gd" id="9_hdx8y"]
 [ext_resource type="Script" path="res://scenes/scripts/bot_2.gd" id="11_yh0yi"]
 [ext_resource type="Script" path="res://scenes/scripts/bot_3.gd" id="12_w8hxi"]
@@ -16,6 +17,31 @@ script = ExtResource("1_f614b")
 position = Vector2(962.74, 542.77)
 scale = Vector2(3.95228, 3.23889)
 texture = ExtResource("1_ypw4k")
+
+[node name="PlayerTurn" type="Sprite2D" parent="."]
+position = Vector2(968.5, 960.375)
+scale = Vector2(2.81333, 0.627777)
+texture = ExtResource("9_4ct54")
+
+[node name="Bot1Turn" type="Sprite2D" parent="."]
+position = Vector2(141, 599)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_4ct54")
+
+[node name="Bot2Turn" type="Sprite2D" parent="."]
+position = Vector2(141, 694)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_4ct54")
+
+[node name="Bot3Turn" type="Sprite2D" parent="."]
+position = Vector2(141, 788)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_4ct54")
+
+[node name="Bot4Turn" type="Sprite2D" parent="."]
+position = Vector2(141, 882)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_4ct54")
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("2_7lb3r")

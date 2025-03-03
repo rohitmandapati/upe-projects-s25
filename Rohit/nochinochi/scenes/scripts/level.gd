@@ -6,9 +6,10 @@ signal roll
 
 
 @onready var prevTurn : int = 4
-@onready var currentTurn : int = 0
+@onready var currentTurn : int = -1
 @onready var players_left = 5
 
+# Player and Bot references
 @onready var player = $Player
 @onready var bot1 = $Bot1
 @onready var bot2 = $Bot2
@@ -19,6 +20,7 @@ signal roll
 @onready var players : Array = [player, bot1, bot2, bot3, bot4]
 @onready var callable : bool = false
 
+# Control logic, buttons, labels references
 @onready var dice_side = $OptionButton
 @onready var num_dice = $SpinBox
 @onready var confirm = $Confirm
@@ -28,6 +30,13 @@ signal roll
 @onready var call_button = $CallButton
 @onready var roll_button = $RollButton
 
+# Turn display references
+@onready var player_turn = $PlayerTurn
+@onready var bot1_turn = $Bot1Turn
+@onready var bot2_turn = $Bot2Turn
+@onready var bot3_turn = $Bot3Turn
+@onready var bot4_turn = $Bot4Turn
+
 @onready var assertFace = 0
 @onready var assertNum = 0
 
@@ -36,6 +45,25 @@ signal roll
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#dice_side.visible = false
+	#num_dice.visible = false
+	#confirm.visible = false
+	#dice_side_label.visible = false
+	#num_dice_label.visible = false
+	#invalid_label.visible = false
+	#call_button.visible = false
+	callable = false
+	_new_round()
+	
+	
+
+func _new_round() -> void:
+	
+	player_turn.visible = false
+	bot1_turn.visible = false
+	bot2_turn.visible = false
+	bot3_turn.visible = false
+	bot4_turn.visible = false
 	dice_side.visible = false
 	num_dice.visible = false
 	confirm.visible = false
@@ -43,25 +71,11 @@ func _ready() -> void:
 	num_dice_label.visible = false
 	invalid_label.visible = false
 	call_button.visible = false
-	callable = false
-	_new_round(0)
-	
-	
-
-func _new_round(start : int) -> void:
-	if true:
-		dice_side.visible = false
-		num_dice.visible = false
-		confirm.visible = false
-		dice_side_label.visible = false
-		num_dice_label.visible = false
-		invalid_label.visible = false
-		call_button.visible = false
 	roll_button.visible = true
 	await roll
 	roll_button.visible = false
 	print(currentTurn)
-	await get_tree().create_timer(2).timeout 
+	#await get_tree().create_timer(2).timeout 
 	_next_turn()
 		
 
@@ -107,10 +121,18 @@ func _get_total() -> int:
 	return temp.size()
 	
 func _next_turn() -> int:
-	bot1._showRoll()
-	bot2._showRoll()
-	bot3._showRoll()
-	bot4._showRoll()
+	print("--------")
+	#bot1._showRoll()
+	#bot2._showRoll()
+	#bot3._showRoll()
+	#bot4._showRoll()
+	print("Face: " + str(assertFace) + "\nNum: " + str(assertNum))
+	player_turn.visible = false
+	bot1_turn.visible = false
+	bot2_turn.visible = false
+	bot3_turn.visible = false
+	bot4_turn.visible = false
+	
 	prevTurn = currentTurn
 	for i in range(players_left):
 		currentTurn += 1
@@ -120,6 +142,7 @@ func _next_turn() -> int:
 			break
 	print(currentTurn)
 	if currentTurn == 0:
+		player_turn.visible = true
 		if callable:
 			call_button.visible = true
 			# implement labels to display current asserts
@@ -137,6 +160,12 @@ func _next_turn() -> int:
 			bot2._showRoll()
 			bot3._showRoll()
 			bot4._showRoll()
+			var out = _call()
+			if out:
+				player.dice -= 1
+			elif !out:
+				players[prevTurn].dice -= 1
+			_new_round()
 			return currentTurn
 		elif player_assert:
 			assertNum = num_dice.value
@@ -149,9 +178,11 @@ func _next_turn() -> int:
 		confirm.visible = false
 		dice_side_label.visible = false
 		num_dice_label.visible = false
-		invalid_label.visible = false
-		await get_tree().create_timer(2).timeout 
+		invalid_label.visible = false 
 		if currentTurn == 1:
+			print("Bot 1 Turn")
+			bot1_turn.visible = true
+			await get_tree().create_timer(2).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot1.boldness_threshold)):
@@ -160,7 +191,8 @@ func _next_turn() -> int:
 						bot1.dice -= 1
 					else:
 						players[prevTurn].dice -= 1
-						
+					_new_round()
+					return currentTurn
 				else:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
@@ -170,6 +202,9 @@ func _next_turn() -> int:
 				assertFace = assertions[0]
 				assertNum = assertions[1]
 		if currentTurn == 2:
+			print("Bot 2 Turn")
+			bot2_turn.visible = true
+			await get_tree().create_timer(2).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot2.boldness_threshold)):
@@ -178,7 +213,8 @@ func _next_turn() -> int:
 						bot2.dice -= 1
 					else:
 						players[prevTurn].dice -= 1
-						
+					_new_round()
+					return currentTurn
 				else:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
@@ -188,6 +224,9 @@ func _next_turn() -> int:
 				assertFace = assertions[0]
 				assertNum = assertions[1]
 		if currentTurn == 3:
+			print("Bot 3 Turn")
+			bot3_turn.visible = true
+			await get_tree().create_timer(2).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot3.boldness_threshold)):
@@ -196,7 +235,8 @@ func _next_turn() -> int:
 						bot3.dice -= 1
 					else:
 						players[prevTurn].dice -= 1
-						
+					_new_round()
+					return currentTurn
 				else:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
@@ -206,6 +246,9 @@ func _next_turn() -> int:
 				assertFace = assertions[0]
 				assertNum = assertions[1]
 		if currentTurn == 4:
+			print("Bot 4 Turn")
+			bot4_turn.visible = true
+			await get_tree().create_timer(2).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot4.boldness_threshold)):
@@ -214,7 +257,8 @@ func _next_turn() -> int:
 						bot4.dice -= 1
 					else:
 						players[prevTurn].dice -= 1
-						
+					_new_round()
+					return currentTurn
 				else:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
