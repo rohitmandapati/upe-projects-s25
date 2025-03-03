@@ -38,8 +38,8 @@ signal assertion_made
 @onready var bot3_turn = $Bot3Turn
 @onready var bot4_turn = $Bot4Turn
 
-@onready var assertFace = 0
-@onready var assertNum = 0
+@onready var assertFace : int = 0
+@onready var assertNum : int = 0
 
 @onready var assertFaceLabel = $CurrentDiceFace
 @onready var assertNumLabel = $CurrentDIceNum
@@ -303,8 +303,8 @@ func _call() -> bool:
 		out = true
 	else:
 		out = false
-	assertFace = 0
-	assertNum = 0
+	assertFace = 1
+	assertNum = 1
 	return out
 	
 
@@ -356,7 +356,6 @@ func _make_assertion() -> Array: # To be implemented
 		else:
 			asserts[0] = assertFace + new_face
 			asserts[1] = assertNum + ceil(randf_range(0.2,1.2))
-	
 	return asserts
 
 func _on_bot_1_dead() -> void:
@@ -383,9 +382,21 @@ func _on_call_button_pressed() -> void:
 	player_call = true
 	player_assert = false
 	decision.emit()
+	
+func _is_valid_assertion(face : int, num : int) -> bool:
+	if face > 6:
+		return false
+	if face < assertFace or num < assertNum:
+		return false
+	if face == assertFace and num == assertNum:
+		return false
+	
+	return true
 
 func _on_confirm_pressed() -> void:
 	if dice_side.get_selected_id() == -1:
+		invalid_label.visible = true
+	elif !_is_valid_assertion(dice_side.get_selected_id() + 1, num_dice.value):
 		invalid_label.visible = true
 	else:
 		player_call = false
