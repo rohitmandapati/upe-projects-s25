@@ -30,7 +30,7 @@ signal assertion_made
 @onready var invalid_label = $Invalid
 @onready var call_button = $CallButton
 @onready var roll_button = $RollButton
-
+@onready var info_box = $InfoBox
 # Turn display references
 @onready var player_turn = $PlayerTurn
 @onready var bot1_turn = $Bot1Turn
@@ -77,8 +77,13 @@ func _new_round() -> void:
 	invalid_label.visible = false
 	call_button.visible = false
 	roll_button.visible = true
+	info_box.clear()
+	callable = false
+	#assertFace = 1
+	#assertNum = 0
 	await roll
 	roll_button.visible = false
+	
 	print(bot1.boldness_threshold)
 	print(bot2.boldness_threshold)
 	print(bot3.boldness_threshold)
@@ -153,7 +158,6 @@ func _next_turn() -> int:
 		player_turn.visible = true
 		if callable:
 			call_button.visible = true
-			# implement labels to display current asserts
 		else:
 			call_button.visible = false
 		dice_side.visible = true
@@ -168,16 +172,30 @@ func _next_turn() -> int:
 			bot2._showRoll()
 			bot3._showRoll()
 			bot4._showRoll()
+			var text = "You called Bot " + str(prevTurn)
+			info_box.clear()
+			info_box.append_text(text)
 			var out = _call()
+			await get_tree().create_timer(2).timeout
 			if out:
 				player.dice -= 1
+				text = "Wrong! You lose a die"
+				info_box.clear()
+				info_box.append_text(text)
 			elif !out:
 				players[prevTurn].dice -= 1
+				text = "Correct! Bot " + str(prevTurn) + " loses a die"
+				info_box.clear()
+				info_box.append_text(text)
+			await get_tree().create_timer(2).timeout
 			_new_round()
 			return currentTurn
 		elif player_assert:
 			assertNum = num_dice.value
 			assertFace = dice_side.get_selected_id() + 1
+			var text = "You asserted " + str(assertNum) + " dice of face " + str(assertFace)
+			info_box.clear()
+			info_box.append_text(text)
 			assertion_made.emit()
 	else:
 		# implement labels to display current asserts
@@ -206,11 +224,17 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					var text = "Bot 1 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					info_box.clear()
+					info_box.append_text(text)
 					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				var text = "Bot 1 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				info_box.clear()
+				info_box.append_text(text)
 				assertion_made.emit()
 		if currentTurn == 2:
 			print("Bot 2 Turn")
@@ -230,11 +254,17 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					var text = "Bot 2 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					info_box.clear()
+					info_box.append_text(text)
 					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				var text = "Bot 2 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				info_box.clear()
+				info_box.append_text(text)
 				assertion_made.emit()
 		if currentTurn == 3:
 			print("Bot 3 Turn")
@@ -254,11 +284,17 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					var text = "Bot 3 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					info_box.clear()
+					info_box.append_text(text)
 					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				var text = "Bot 3 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				info_box.clear()
+				info_box.append_text(text)
 				assertion_made.emit()
 		if currentTurn == 4:
 			print("Bot 4 Turn")
@@ -278,11 +314,17 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					var text = "Bot 4 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					info_box.clear()
+					info_box.append_text(text)
 					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				var text = "Bot 4 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				info_box.clear()
+				info_box.append_text(text)
 				assertion_made.emit()
 	callable = true
 	_next_turn()
@@ -386,6 +428,8 @@ func _on_call_button_pressed() -> void:
 func _is_valid_assertion(face : int, num : int) -> bool:
 	if face > 6:
 		return false
+	if face == 1 and num == 1 and assertFace == 1 and assertNum == 1:
+		return true
 	if face < assertFace or num < assertNum:
 		return false
 	if face == assertFace and num == assertNum:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5vr35ng8hc34"]
 
-[ext_resource type="Texture2D" uid="uid://bmrxgngmh8cul" path="res://textures/rulebook__nochi_nochi.png" id="1_64v84"]
-[ext_resource type="Script" path="res://scenes/scripts/rulebook_pg_2.gd" id="1_e1u2u"]
+[ext_resource type="Script" uid="uid://jennw5trqlei" path="res://scenes/scripts/rulebook_pg_2.gd" id="1_e1u2u"]
+[ext_resource type="Texture2D" uid="uid://betqydf3bgjx3" path="res://textures/rulebook-1.png" id="2_1m1sx"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,7 +15,7 @@ script = ExtResource("1_e1u2u")
 [node name="RulebookNochiNochi" type="Sprite2D" parent="."]
 position = Vector2(961, 42)
 scale = Vector2(1.16052, 1.16052)
-texture = ExtResource("1_64v84")
+texture = ExtResource("2_1m1sx")
 
 [node name="Button" type="Button" parent="RulebookNochiNochi"]
 offset_left = 664.357
