@@ -57,4 +57,67 @@ offset_bottom = 629.0
 theme_override_font_sizes/font_size = 80
 text = "Roll!"
 
+[node name="OptionButton" type="OptionButton" parent="."]
+offset_left = 952.0
+offset_top = 1649.0
+offset_right = 1122.0
+offset_bottom = 1782.0
+theme_override_font_sizes/font_size = 50
+alignment = 1
+item_count = 6
+popup/item_0/text = "1"
+popup/item_1/text = "2"
+popup/item_1/id = 1
+popup/item_2/text = "3"
+popup/item_2/id = 2
+popup/item_3/text = "4"
+popup/item_3/id = 3
+popup/item_4/text = "5"
+popup/item_4/id = 4
+popup/item_5/text = "6"
+popup/item_5/id = 5
+
+[node name="Dice  Side" type="RichTextLabel" parent="."]
+offset_left = 956.0
+offset_top = 1608.0
+offset_right = 1125.0
+offset_bottom = 1666.0
+theme_override_font_sizes/normal_font_size = 36
+text = "Dice Side"
+text_direction = 3
+
+[node name="SpinBox" type="SpinBox" parent="."]
+offset_left = 1145.0
+offset_top = 1647.0
+offset_right = 1338.0
+offset_bottom = 1781.0
+min_value = 1.0
+value = 1.0
+
+[node name="Amount" type="RichTextLabel" parent="."]
+offset_left = 1161.0
+offset_top = 1606.0
+offset_right = 1330.0
+offset_bottom = 1664.0
+theme_override_font_sizes/normal_font_size = 36
+text = "Amount"
+text_direction = 3
+
+[node name="Confirm" type="RichTextLabel" parent="."]
+offset_left = 1161.0
+offset_top = 1606.0
+offset_right = 1330.0
+offset_bottom = 1664.0
+theme_override_font_sizes/normal_font_size = 36
+text = "Amount"
+text_direction = 3
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1000.0
+offset_top = 1796.0
+offset_right = 1270.0
+offset_bottom = 1887.0
+theme_override_font_sizes/font_size = 60
+text = "Confirm"
+
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]

@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-
 # Called at the start of the round. Rolls a number of dice and returns the result.
 func _roll(num_dice: int) -> void:
 	#clears previous visuals
@@ -39,3 +38,8 @@ func _roll(num_dice: int) -> void:
 		sprite.position = Vector2(725 + (i * 100), 950)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
+
+
+func _get_last_roll() -> Array:
+	return result
+	
