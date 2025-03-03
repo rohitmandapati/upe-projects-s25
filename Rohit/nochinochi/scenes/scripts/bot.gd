@@ -1,6 +1,6 @@
 extends Node2D
 
-signal bot_1_dead
+signal bot_1_dead # Differs
 
 @onready var difficulty = 1
 @onready var level = $".."
@@ -31,7 +31,7 @@ func _ready() -> void: # Dice faces 1 to 6
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if dice == 0:
+	if dice <= 0:
 		bot_1_dead.emit() #Differs from bot to bot
 
 
@@ -49,17 +49,15 @@ func _clearRoll() -> void:
 			child.queue_free()
 
 #shows bot dice.
-func _showRoll(num_dice: int) -> void:
+func _showRoll() -> void:
 	#clears previous visuals.
 	_clearRoll()
 
 	#creates visuals.
-	for i in range(num_dice):
-		var roll_result = randi() % 6 + 1
-		botResult.append(roll_result)
+	for i in range(dice):
 		var sprite = Sprite2D.new()
-		sprite.texture = bot_dice_faces[roll_result-1]
-		sprite.position = Vector2(450 + (i * 100), 950)
+		sprite.texture = bot_dice_faces[botResult[i]-1]
+		sprite.position = Vector2(50 + (i * 100), 50)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
 
@@ -70,9 +68,6 @@ func _get_last_roll() -> Array:
 
 func _on_level_roll() -> void:
 	_clearRoll()
-	if level.alive[0]: #Differs from bot to bot
+	if level.alive[1]: #Differs from bot to bot
 		_botRoll(dice)
-
-func _make_assertion(prevFace : int, prevNum : int) -> Array:
-	var out : Array = [0,0]
-	return out
+		_showRoll()

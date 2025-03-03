@@ -48,6 +48,7 @@ offset_right = 1209.0
 offset_bottom = 619.0
 theme_override_font_sizes/font_size = 50
 alignment = 1
+allow_reselect = true
 item_count = 6
 popup/item_0/text = "1"
 popup/item_1/text = "2"
@@ -87,6 +88,7 @@ offset_top = 484.0
 offset_right = 1425.0
 offset_bottom = 618.0
 min_value = 1.0
+max_value = 36.0
 value = 1.0
 
 [node name="Amount" type="RichTextLabel" parent="."]
@@ -114,13 +116,19 @@ offset_bottom = 687.0
 theme_override_font_sizes/font_size = 80
 text = "Call!"
 
-[connection signal="new_round" from="." to="Player" method="_on_level_new_round"]
 [connection signal="new_round" from="." to="RollButton" method="_on_level_new_round"]
 [connection signal="roll" from="." to="." method="_on_roll"]
 [connection signal="roll" from="." to="Player" method="_on_level_roll"]
 [connection signal="roll" from="." to="Bot1" method="_on_level_roll"]
+[connection signal="roll" from="." to="Bot2" method="_on_level_roll"]
+[connection signal="roll" from="." to="Bot3" method="_on_level_roll"]
+[connection signal="roll" from="." to="Bot4" method="_on_level_roll"]
 [connection signal="bot_1_dead" from="Bot1" to="." method="_on_bot_1_dead"]
 [connection signal="bot_2_dead" from="Bot2" to="." method="_on_bot_2_dead"]
+[connection signal="bot_3_dead" from="Bot3" to="." method="_on_bot_3_dead"]
+[connection signal="bot_4_dead" from="Bot4" to="." method="_on_bot_4_dead"]
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="RollButton" to="Bot1" method="_on_roll_button_pressed"]
 [connection signal="pressed" from="RollButton" to="RollButton" method="_on_pressed"]
+[connection signal="pressed" from="Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="CallButton" to="." method="_on_call_button_pressed"]

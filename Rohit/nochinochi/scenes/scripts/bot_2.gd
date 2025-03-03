@@ -1,6 +1,9 @@
 extends Node2D
 
-signal bot_2_dead
+signal bot_2_dead # Differs
+
+@onready var difficulty = 1
+@onready var level = $".."
 
 #current roll
 var botResult : Array = []
@@ -12,6 +15,8 @@ var dice : int
 var bot_dice_faces = []
 
 
+var boldness_threshold : float
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void: # Dice faces 1 to 6
 	bot_dice_faces.append(load("res://textures/dice-1.png"))
@@ -21,16 +26,14 @@ func _ready() -> void: # Dice faces 1 to 6
 	bot_dice_faces.append(load("res://textures/dice-5.png"))
 	bot_dice_faces.append(load("res://textures/dice-6.png"))
 	dice = 6
+	var init : float = randf_range(0.0, 1.0)
+	boldness_threshold = -1.0 / (1.0 + pow(2.72,-5*(init-0.8))) + 1.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if dice == 0:
-		bot_2_dead.emit()
+	if dice <= 0:
+		bot_2_dead.emit() #Differs from bot to bot
 
-
-
-func _on_roll_button_pressed() -> void:
-	_botRoll(dice)
 
 
 #rolls dice for bot.
@@ -46,20 +49,25 @@ func _clearRoll() -> void:
 			child.queue_free()
 
 #shows bot dice.
-func _showRoll(num_dice: int) -> void:
+func _showRoll() -> void:
 	#clears previous visuals.
 	_clearRoll()
 
 	#creates visuals.
-	for i in range(num_dice):
-		var roll_result = randi() % 6 + 1
-		botResult.append(roll_result)
+	for i in range(dice):
 		var sprite = Sprite2D.new()
-		sprite.texture = bot_dice_faces[roll_result-1]
-		sprite.position = Vector2(450 + (i * 100), 950)
+		sprite.texture = bot_dice_faces[botResult[i]-1]
+		sprite.position = Vector2(50 + (i * 100), 150)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
 
 
 func _get_last_roll() -> Array:
 	return botResult
+
+
+func _on_level_roll() -> void:
+	_clearRoll()
+	if level.alive[2]: #Differs from bot to bot
+		_botRoll(dice)
+		_showRoll()

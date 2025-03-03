@@ -26,6 +26,7 @@ signal roll
 @onready var num_dice_label = $Amount
 @onready var invalid_label = $Invalid
 @onready var call_button = $CallButton
+@onready var roll_button = $RollButton
 
 @onready var assertFace = 0
 @onready var assertNum = 0
@@ -42,20 +43,13 @@ func _ready() -> void:
 	num_dice_label.visible = false
 	invalid_label.visible = false
 	call_button.visible = false
+	callable = false
+	_new_round(0)
 	
 	
 
 func _new_round(start : int) -> void:
-	new_round.emit()
-	if currentTurn == 0:
-		dice_side.visible = true
-		num_dice.visible = true
-		confirm.visible = true
-		dice_side_label.visible = true
-		num_dice_label.visible = true
-		invalid_label.visible = false
-		call_button.visible = false
-	else:
+	if true:
 		dice_side.visible = false
 		num_dice.visible = false
 		confirm.visible = false
@@ -63,6 +57,12 @@ func _new_round(start : int) -> void:
 		num_dice_label.visible = false
 		invalid_label.visible = false
 		call_button.visible = false
+	roll_button.visible = true
+	await roll
+	roll_button.visible = false
+	print(currentTurn)
+	await get_tree().create_timer(2).timeout 
+	_next_turn()
 		
 
 
@@ -73,7 +73,8 @@ func _process(delta: float) -> void:
 
 func _on_roll_button_pressed() -> void:
 	roll.emit()
-	_new_round(currentTurn)
+	
+	#_new_round(currentTurn)
 
 
 func _combine_rolls() -> Array:
@@ -106,27 +107,42 @@ func _get_total() -> int:
 	return temp.size()
 	
 func _next_turn() -> int:
-	callable = true
+	bot1._showRoll()
+	bot2._showRoll()
+	bot3._showRoll()
+	bot4._showRoll()
 	prevTurn = currentTurn
 	for i in range(players_left):
 		currentTurn += 1
 		@warning_ignore("integer_division")
-		currentTurn /= 5
+		currentTurn %= 5
 		if alive[currentTurn] == true:
 			break
-	
+	print(currentTurn)
 	if currentTurn == 0:
 		if callable:
 			call_button.visible = true
-			# implement labels to display current call
+			# implement labels to display current asserts
+		else:
+			call_button.visible = false
 		dice_side.visible = true
 		num_dice.visible = true
 		confirm.visible = true
 		dice_side_label.visible = true
 		num_dice_label.visible = true
 		invalid_label.visible = false
+		await decision
+		if player_call:
+			bot1._showRoll()
+			bot2._showRoll()
+			bot3._showRoll()
+			bot4._showRoll()
+			return currentTurn
+		elif player_assert:
+			assertNum = num_dice.value
+			assertFace = dice_side.get_selected_id() + 1
 	else:
-		# implement labels to display current call
+		# implement labels to display current asserts
 		call_button.visible = false
 		dice_side.visible = false
 		num_dice.visible = false
@@ -134,20 +150,81 @@ func _next_turn() -> int:
 		dice_side_label.visible = false
 		num_dice_label.visible = false
 		invalid_label.visible = false
-		
-		#sleep here
-		if callable:
-			var chance = _calculate_chance(assertNum)
-			if (chance < (1 - players[currentTurn].boldness_threshold)):
-				_call()
+		await get_tree().create_timer(2).timeout 
+		if currentTurn == 1:
+			if callable:
+				var chance = _calculate_chance(assertNum)
+				if (chance < (1 - bot1.boldness_threshold)):
+					var call_result = _call()
+					if call_result:
+						bot1.dice -= 1
+					else:
+						players[prevTurn].dice -= 1
+						
+				else:
+					var assertions : Array = _make_assertion()
+					assertFace = assertions[0]
+					assertNum = assertions[1]
 			else:
-				var assertions : Array = players[currentTurn]._make_assertion()
+				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
-				assertNum = assertFace[1]
-		else:
-			var assertions : Array = players[currentTurn]._make_assertion()
-			assertFace = assertions[0]
-			assertNum = assertFace[1]
+				assertNum = assertions[1]
+		if currentTurn == 2:
+			if callable:
+				var chance = _calculate_chance(assertNum)
+				if (chance < (1 - bot2.boldness_threshold)):
+					var call_result = _call()
+					if call_result:
+						bot2.dice -= 1
+					else:
+						players[prevTurn].dice -= 1
+						
+				else:
+					var assertions : Array = _make_assertion()
+					assertFace = assertions[0]
+					assertNum = assertions[1]
+			else:
+				var assertions : Array = _make_assertion()
+				assertFace = assertions[0]
+				assertNum = assertions[1]
+		if currentTurn == 3:
+			if callable:
+				var chance = _calculate_chance(assertNum)
+				if (chance < (1 - bot3.boldness_threshold)):
+					var call_result = _call()
+					if call_result:
+						bot3.dice -= 1
+					else:
+						players[prevTurn].dice -= 1
+						
+				else:
+					var assertions : Array = _make_assertion()
+					assertFace = assertions[0]
+					assertNum = assertions[1]
+			else:
+				var assertions : Array = _make_assertion()
+				assertFace = assertions[0]
+				assertNum = assertions[1]
+		if currentTurn == 4:
+			if callable:
+				var chance = _calculate_chance(assertNum)
+				if (chance < (1 - bot4.boldness_threshold)):
+					var call_result = _call()
+					if call_result:
+						bot4.dice -= 1
+					else:
+						players[prevTurn].dice -= 1
+						
+				else:
+					var assertions : Array = _make_assertion()
+					assertFace = assertions[0]
+					assertNum = assertions[1]
+			else:
+				var assertions : Array = _make_assertion()
+				assertFace = assertions[0]
+				assertNum = assertions[1]
+	callable = true
+	_next_turn()
 	return currentTurn
 
 func _call() -> bool:
@@ -195,6 +272,21 @@ func _calculate_chance(num : int) -> float:
 	var rolls : Array = _combine_rolls()
 	var out : float = probability_at_least_m_dice(rolls.size(), num)
 	return out
+	
+func _make_assertion() -> Array: # To be implemented
+	var asserts = [0,0]
+	var t = randf()
+	if t <=0.7:
+		var new_face = ceil(randf_range(0.2,1.2))
+		if assertFace + new_face > 6:
+			asserts[0] = 1
+			asserts[1] = assertNum + ceil(randf_range(-0.2,0.8))
+		else:
+			asserts[0] = assertFace + new_face
+	else:
+		asserts[0] = 1
+		asserts[1] = assertNum + ceil(randf_range(-0.2,0.8))
+	return asserts
 
 func _on_bot_1_dead() -> void:
 	alive[1] = false
@@ -211,3 +303,20 @@ func _on_bot_4_dead() -> void:
 func _on_player_dead() -> void:
 	pass
 	
+
+signal decision
+var player_call : bool
+var player_assert : bool
+
+func _on_call_button_pressed() -> void:
+	player_call = true
+	player_assert = false
+	decision.emit()
+
+func _on_confirm_pressed() -> void:
+	if dice_side.get_selected_id() == -1:
+		invalid_label.visible = true
+	else:
+		player_call = false
+		player_assert = true
+		decision.emit()

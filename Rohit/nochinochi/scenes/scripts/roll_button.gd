@@ -12,9 +12,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-
-func _on_level_new_round() -> void:
-	roll_button.visible = true
-
-func _on_pressed() -> void:
-	roll_button.visible = false
+#
+#func _on_level_new_round() -> void:
+	#roll_button.visible = true
+#
+#func _on_pressed() -> void:
+	#roll_button.visible = false
