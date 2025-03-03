@@ -2,6 +2,8 @@ extends Node2D
 
 var result = []
 
+var dice : int
+
 #initalizes dice face
 var dice_faces = []
 
@@ -14,20 +16,26 @@ func _ready() -> void: # Dice faces 1 to 6
 	dice_faces.append(load("res://textures/dice-4.png"))
 	dice_faces.append(load("res://textures/dice-5.png"))
 	dice_faces.append(load("res://textures/dice-6.png"))
-		
+	
+	dice = 6
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func _on_level_roll() -> void:
+	_roll(dice)
 
-
-# Called at the start of the round. Rolls a number of dice and returns the result.
-func _roll(num_dice: int) -> void:
+func _clear() -> void:
 	#clears previous visuals
 	for child in get_children():
 		if child is Sprite2D:
 			child.queue_free()
+
+# Called at the start of the round. Rolls a number of dice and returns the result.
+func _roll(num_dice: int) -> void:
+	_clear()
 
 	#rolls dice and creates visuals
 	for i in range(num_dice):

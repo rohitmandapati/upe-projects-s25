@@ -1,9 +1,6 @@
 extends Node2D
 
-signal bot_1_dead
-
-@onready var difficulty = 1
-@onready var level = $".."
+signal bot_2_dead
 
 #current roll
 var botResult : Array = []
@@ -15,8 +12,6 @@ var dice : int
 var bot_dice_faces = []
 
 
-var boldness_threshold : float
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void: # Dice faces 1 to 6
 	bot_dice_faces.append(load("res://textures/dice-1.png"))
@@ -26,14 +21,16 @@ func _ready() -> void: # Dice faces 1 to 6
 	bot_dice_faces.append(load("res://textures/dice-5.png"))
 	bot_dice_faces.append(load("res://textures/dice-6.png"))
 	dice = 6
-	var init : float = randf_range(0.0, 1.0)
-	boldness_threshold = -1.0 / (1.0 + pow(2.72,-5*(init-0.8))) + 1.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if dice == 0:
-		bot_1_dead.emit() #Differs from bot to bot
+		bot_2_dead.emit()
 
+
+
+func _on_roll_button_pressed() -> void:
+	_botRoll(dice)
 
 
 #rolls dice for bot.
@@ -66,13 +63,3 @@ func _showRoll(num_dice: int) -> void:
 
 func _get_last_roll() -> Array:
 	return botResult
-
-
-func _on_level_roll() -> void:
-	_clearRoll()
-	if level.alive[0]: #Differs from bot to bot
-		_botRoll(dice)
-
-func _make_assertion(prevFace : int, prevNum : int) -> Array:
-	var out : Array = [0,0]
-	return out
