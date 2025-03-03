@@ -63,7 +63,7 @@ text = "[center]Choose your difficulty[/center]"
 scroll_active = false
 script = ExtResource("2_b0083")
 
-[node name="Button" type="Button" parent="."]
+[node name="Start" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1159.0
 offset_top = 608.0
@@ -86,6 +86,17 @@ rotation = 0.380482
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_5gspi")
 
-[connection signal="item_selected" from="Difficulty" to="Button" method="_on_difficulty_item_selected"]
-[connection signal="please_select_diff" from="Button" to="DifficultyChoose" method="_on_button_please_select_diff"]
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[node name="Rulebook" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1647.0
+offset_top = 970.0
+offset_right = 1861.0
+offset_bottom = 1042.0
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 45
+text = "Rulebook"
+
+[connection signal="item_selected" from="Difficulty" to="Start" method="_on_difficulty_item_selected"]
+[connection signal="please_select_diff" from="Start" to="DifficultyChoose" method="_on_button_please_select_diff"]
+[connection signal="pressed" from="Start" to="Start" method="_on_pressed"]
+[connection signal="pressed" from="Rulebook" to="DifficultyChoose" method="_on_rulebook_pressed"]

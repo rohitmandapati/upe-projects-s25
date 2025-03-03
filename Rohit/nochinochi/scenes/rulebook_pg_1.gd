@@ -1,4 +1,4 @@
-extends RichTextLabel
+extends Control
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,10 +11,5 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_button_please_select_diff() -> void:
-	clear()
-	append_text("[center]Please Select Difficulty[/center]")
-
-
-func _on_rulebook_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/rulebook-pg1.tscn")
+func _on_button_pressed() -> void:
+		get_tree().change_scene_to_file("res://scenes/rulebook-pg2.tscn")
