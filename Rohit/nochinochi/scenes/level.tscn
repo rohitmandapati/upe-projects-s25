@@ -19,28 +19,28 @@ scale = Vector2(3.95228, 3.23889)
 texture = ExtResource("1_ypw4k")
 
 [node name="PlayerTurn" type="Sprite2D" parent="."]
-position = Vector2(968.5, 960.375)
-scale = Vector2(2.81333, 0.627777)
+position = Vector2(959.5, 952.375)
+scale = Vector2(2.75111, 0.556666)
 texture = ExtResource("9_4ct54")
 
 [node name="Bot1Turn" type="Sprite2D" parent="."]
-position = Vector2(141, 599)
-scale = Vector2(0.4, 0.4)
+position = Vector2(1820, 600)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_4ct54")
 
 [node name="Bot2Turn" type="Sprite2D" parent="."]
-position = Vector2(141, 694)
-scale = Vector2(0.4, 0.4)
+position = Vector2(1380, 100)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_4ct54")
 
 [node name="Bot3Turn" type="Sprite2D" parent="."]
-position = Vector2(141, 788)
-scale = Vector2(0.4, 0.4)
+position = Vector2(540, 100)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_4ct54")
 
 [node name="Bot4Turn" type="Sprite2D" parent="."]
-position = Vector2(141, 882)
-scale = Vector2(0.4, 0.4)
+position = Vector2(100, 600)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_4ct54")
 
 [node name="Player" type="Node2D" parent="."]
@@ -142,6 +142,25 @@ offset_bottom = 687.0
 theme_override_font_sizes/font_size = 80
 text = "Call!"
 
+[node name="CurrentDiceFace" type="RichTextLabel" parent="."]
+offset_left = 1040.0
+offset_top = 313.0
+offset_right = 1207.0
+offset_bottom = 433.0
+theme_override_font_sizes/normal_font_size = 56
+theme_override_font_sizes/bold_font_size = 56
+bbcode_enabled = true
+
+[node name="CurrentDIceNum" type="RichTextLabel" parent="."]
+offset_left = 1231.0
+offset_top = 313.0
+offset_right = 1408.0
+offset_bottom = 432.0
+theme_override_font_sizes/normal_font_size = 56
+theme_override_font_sizes/bold_font_size = 56
+bbcode_enabled = true
+
+[connection signal="assertion_made" from="." to="." method="_on_assertion_made"]
 [connection signal="new_round" from="." to="RollButton" method="_on_level_new_round"]
 [connection signal="roll" from="." to="." method="_on_roll"]
 [connection signal="roll" from="." to="Player" method="_on_level_roll"]

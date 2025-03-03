@@ -3,6 +3,7 @@ extends Node2D
 signal new_round
 signal player_win
 signal roll
+signal assertion_made
 
 
 @onready var prevTurn : int = 4
@@ -40,6 +41,8 @@ signal roll
 @onready var assertFace = 0
 @onready var assertNum = 0
 
+@onready var assertFaceLabel = $CurrentDiceFace
+@onready var assertNumLabel = $CurrentDIceNum
 
 	
 
@@ -57,8 +60,10 @@ func _ready() -> void:
 	
 	
 
+
 func _new_round() -> void:
-	
+	assertFaceLabel.clear()
+	assertNumLabel.clear()
 	player_turn.visible = false
 	bot1_turn.visible = false
 	bot2_turn.visible = false
@@ -74,7 +79,10 @@ func _new_round() -> void:
 	roll_button.visible = true
 	await roll
 	roll_button.visible = false
-	print(currentTurn)
+	print(bot1.boldness_threshold)
+	print(bot2.boldness_threshold)
+	print(bot3.boldness_threshold)
+	print(bot4.boldness_threshold)
 	#await get_tree().create_timer(2).timeout 
 	_next_turn()
 		
@@ -170,6 +178,7 @@ func _next_turn() -> int:
 		elif player_assert:
 			assertNum = num_dice.value
 			assertFace = dice_side.get_selected_id() + 1
+			assertion_made.emit()
 	else:
 		# implement labels to display current asserts
 		call_button.visible = false
@@ -197,10 +206,12 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				assertion_made.emit()
 		if currentTurn == 2:
 			print("Bot 2 Turn")
 			bot2_turn.visible = true
@@ -219,10 +230,12 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				assertion_made.emit()
 		if currentTurn == 3:
 			print("Bot 3 Turn")
 			bot3_turn.visible = true
@@ -241,10 +254,12 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				assertion_made.emit()
 		if currentTurn == 4:
 			print("Bot 4 Turn")
 			bot4_turn.visible = true
@@ -263,10 +278,12 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
+					assertion_made.emit()
 			else:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
+				assertion_made.emit()
 	callable = true
 	_next_turn()
 	return currentTurn
@@ -320,16 +337,26 @@ func _calculate_chance(num : int) -> float:
 func _make_assertion() -> Array: # To be implemented
 	var asserts = [0,0]
 	var t = randf()
-	if t <=0.7:
+	if t <=0.4: #increase faces
 		var new_face = ceil(randf_range(0.2,1.2))
-		if assertFace + new_face > 6:
-			asserts[0] = 1
-			asserts[1] = assertNum + ceil(randf_range(-0.2,0.8))
+		if assertFace + new_face >= 6:
+			asserts[0] = 6
+			asserts[1] = assertNum + ceil(randf_range(0.2,1.2))
 		else:
 			asserts[0] = assertFace + new_face
-	else:
-		asserts[0] = 1
-		asserts[1] = assertNum + ceil(randf_range(-0.2,0.8))
+			asserts[1] = assertNum
+	elif t <= 0.8: #increases num
+		asserts[0] = assertFace
+		asserts[1] = assertNum + ceil(randf_range(0.2,1.2))
+	else: #increases both
+		var new_face = ceil(randf_range(0.2,1.2))
+		if assertFace + new_face >= 6:
+			asserts[0] = 6
+			asserts[1] = assertNum + ceil(randf_range(0.2,1.2))
+		else:
+			asserts[0] = assertFace + new_face
+			asserts[1] = assertNum + ceil(randf_range(0.2,1.2))
+	
 	return asserts
 
 func _on_bot_1_dead() -> void:
@@ -364,3 +391,10 @@ func _on_confirm_pressed() -> void:
 		player_call = false
 		player_assert = true
 		decision.emit()
+
+
+func _on_assertion_made() -> void:
+	assertFaceLabel.clear()
+	assertFaceLabel.append_text("[center][b]" + str(assertFace) + "[/b]")
+	assertNumLabel.clear()
+	assertNumLabel.append_text("[center][b]" + str(assertNum) + "[/b]")

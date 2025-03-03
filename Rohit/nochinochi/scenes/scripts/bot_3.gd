@@ -57,7 +57,7 @@ func _showRoll() -> void:
 	for i in range(dice):
 		var sprite = Sprite2D.new()
 		sprite.texture = bot_dice_faces[botResult[i]-1]
-		sprite.position = Vector2(50 + (i * 100), 250)
+		sprite.position = Vector2(290 + (i * 100), 100)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
 

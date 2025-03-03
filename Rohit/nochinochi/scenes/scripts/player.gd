@@ -43,7 +43,7 @@ func _roll(num_dice: int) -> void:
 		result.append(roll_result)
 		var sprite = Sprite2D.new()
 		sprite.texture = dice_faces[roll_result-1]
-		sprite.position = Vector2(725 + (i * 100), 950)
+		sprite.position = Vector2(710 + (i * 100), 950)
 		sprite.scale = Vector2(0.2, 0.2)
 		add_child(sprite)
 

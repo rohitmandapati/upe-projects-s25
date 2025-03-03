@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b58r8081tlqi4"]
 
 [ext_resource type="Texture2D" uid="uid://bmrxgngmh8cul" path="res://textures/rulebook__nochi_nochi.png" id="1_cy6fo"]
-[ext_resource type="Script" path="res://scenes/rulebook_pg_1.gd" id="1_rekux"]
+[ext_resource type="Script" path="res://scenes/scripts/rulebook_pg_1.gd" id="1_rekux"]
 
 [node name="Rulebook" type="Control"]
 custom_minimum_size = Vector2(600, 800)
