@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://8t2snaruopsj"]
 
-[ext_resource type="Script" uid="uid://djjrp6hiqxnvq" path="res://scenes/scripts/level.gd" id="1_f614b"]
+[ext_resource type="Script" path="res://scenes/scripts/level.gd" id="1_f614b"]
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_ypw4k"]
-[ext_resource type="Script" uid="uid://j0ch7nxgxwad" path="res://scenes/scripts/player.gd" id="2_7lb3r"]
+[ext_resource type="Script" path="res://scenes/scripts/player.gd" id="2_7lb3r"]
 [ext_resource type="Texture2D" uid="uid://b2a3gxmsufxnr" path="res://textures/green_square.png" id="9_4ct54"]
-[ext_resource type="Script" uid="uid://dagv5xiqkdlfr" path="res://scenes/scripts/bot.gd" id="9_hdx8y"]
-[ext_resource type="Script" uid="uid://bs76jdq18u6v1" path="res://scenes/scripts/bot_2.gd" id="11_yh0yi"]
-[ext_resource type="Script" uid="uid://ck3gty3cm71ic" path="res://scenes/scripts/bot_3.gd" id="12_w8hxi"]
-[ext_resource type="Script" uid="uid://bfuxn4jcpsjyt" path="res://scenes/scripts/bot_4.gd" id="13_h8gcc"]
-[ext_resource type="Script" uid="uid://dt3vbe4bcb1vk" path="res://scenes/scripts/roll_button.gd" id="14_qiuuy"]
+[ext_resource type="Script" path="res://scenes/scripts/bot.gd" id="9_hdx8y"]
+[ext_resource type="Script" path="res://scenes/scripts/bot_2.gd" id="11_yh0yi"]
+[ext_resource type="Script" path="res://scenes/scripts/bot_3.gd" id="12_w8hxi"]
+[ext_resource type="Script" path="res://scenes/scripts/bot_4.gd" id="13_h8gcc"]
+[ext_resource type="Script" path="res://scenes/scripts/roll_button.gd" id="14_qiuuy"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_f614b")
@@ -85,7 +85,6 @@ alignment = 1
 allow_reselect = true
 item_count = 6
 popup/item_0/text = "1"
-popup/item_0/id = 0
 popup/item_1/text = "2"
 popup/item_1/id = 1
 popup/item_2/text = "3"
