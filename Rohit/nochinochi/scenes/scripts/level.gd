@@ -193,7 +193,7 @@ func _next_turn() -> int:
 		elif player_assert:
 			assertNum = num_dice.value
 			assertFace = dice_side.get_selected_id() + 1
-			var text = "You asserted " + str(assertNum) + " dice of face " + str(assertFace)
+			var text = "You say there are " + str(assertNum) + " dice of face " + str(assertFace)
 			info_box.clear()
 			info_box.append_text(text)
 			assertion_made.emit()
@@ -216,9 +216,9 @@ func _next_turn() -> int:
 					var call_result = _call()
 					var text = "Bot 1 calls "
 					if prevTurn == 0:
-						text += "You"
+						text += "you"
 					else:
-							text += "Bot " + str(prevTurn)
+						text += "Bot " + str(prevTurn)
 					info_box.clear()
 					info_box.append_text(text)
 					await get_tree().create_timer(2).timeout
@@ -244,7 +244,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 1 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					var text = "Bot 1 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -252,7 +252,7 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 1 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				var text = "Bot 1 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()
@@ -265,7 +265,7 @@ func _next_turn() -> int:
 				if (chance < (1 - bot2.boldness_threshold)):
 					var text = "Bot 2 calls "
 					if prevTurn == 0:
-						text += "You"
+						text += "you"
 					else:
 							text += "Bot " + str(prevTurn)
 					info_box.clear()
@@ -294,7 +294,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 2 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					var text = "Bot 2 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -302,7 +302,7 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 2 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				var text = "Bot 2 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()
@@ -344,7 +344,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 3 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					var text = "Bot 3 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -352,7 +352,7 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 3 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				var text = "Bot 3 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()
@@ -394,7 +394,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 4 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+					var text = "Bot 4 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -402,7 +402,7 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 4 asserted " + str(assertNum) + " dice of face " + str(assertFace)
+				var text = "Bot 4 says there are " + str(assertNum) + " dice with face " + str(assertFace)
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()

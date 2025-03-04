@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbgicuev16n53"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_4qmtk"]
-[ext_resource type="Script" uid="uid://bwaqefsnjqphm" path="res://scenes/scripts/start_button.gd" id="2_4ryk2"]
-[ext_resource type="Script" uid="uid://d3k88qg4ln2lx" path="res://scenes/scripts/difficulty_choose.gd" id="2_b0083"]
+[ext_resource type="Script" path="res://scenes/scripts/start_button.gd" id="2_4ryk2"]
+[ext_resource type="Script" path="res://scenes/scripts/difficulty_choose.gd" id="2_b0083"]
 [ext_resource type="Texture2D" uid="uid://jpa2d2dmvo7n" path="res://textures/dice-1.png" id="3_yccag"]
 [ext_resource type="Texture2D" uid="uid://vt8meetpp7xr" path="res://textures/dice-4.png" id="4_5gspi"]
 
@@ -46,7 +46,6 @@ icon_alignment = 1
 allow_reselect = true
 item_count = 3
 popup/item_0/text = "Easy"
-popup/item_0/id = 0
 popup/item_1/text = "Medium"
 popup/item_1/id = 1
 popup/item_2/text = "Hard"
