@@ -176,6 +176,7 @@ bbcode_enabled = true
 [connection signal="roll" from="." to="Bot2" method="_on_level_roll"]
 [connection signal="roll" from="." to="Bot3" method="_on_level_roll"]
 [connection signal="roll" from="." to="Bot4" method="_on_level_roll"]
+[connection signal="player_dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="bot_1_dead" from="Bot1" to="." method="_on_bot_1_dead"]
 [connection signal="bot_2_dead" from="Bot2" to="." method="_on_bot_2_dead"]
 [connection signal="bot_3_dead" from="Bot3" to="." method="_on_bot_3_dead"]

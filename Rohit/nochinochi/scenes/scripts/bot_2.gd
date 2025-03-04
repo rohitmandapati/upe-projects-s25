@@ -70,4 +70,4 @@ func _on_level_roll() -> void:
 	_clearRoll()
 	if level.alive[2]: #Differs from bot to bot
 		_botRoll(dice)
-		_showRoll()
+		#_showRoll()

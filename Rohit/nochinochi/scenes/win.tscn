@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwrdjotudepbp"]
+
+[ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_26mgb"]
+[ext_resource type="Script" path="res://scenes/scripts/try_again.gd" id="2_jd8d0"]
+
+[node name="win" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(962, 542.5)
+scale = Vector2(3.94309, 3.22874)
+texture = ExtResource("1_26mgb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 553.0
+offset_top = 368.0
+offset_right = 1373.0
+offset_bottom = 532.0
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[center]Good job! You won!"
+
+[node name="TryAgain" type="Button" parent="."]
+offset_left = 772.0
+offset_top = 545.0
+offset_right = 1153.0
+offset_bottom = 719.0
+theme_override_font_sizes/font_size = 60
+text = "Play Again?"
+script = ExtResource("2_jd8d0")
+
+[connection signal="pressed" from="TryAgain" to="TryAgain" method="_on_pressed"]

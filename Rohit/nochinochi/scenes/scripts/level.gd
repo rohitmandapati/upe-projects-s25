@@ -58,7 +58,14 @@ func _ready() -> void:
 	callable = false
 	_new_round()
 	
-	
+
+func _process(delta : float) -> void:
+	if alive[0] and !alive[1] and !alive[2] and !alive[3] and !alive[4]:
+		await get_tree().create_timer(2).timeout
+		get_tree().change_scene_to_file("res://scenes/win.tscn")
+	if !alive[0]:
+		await get_tree().create_timer(2).timeout
+		get_tree().change_scene_to_file("res://scenes/lose.tscn")
 
 
 func _new_round() -> void:
@@ -93,10 +100,6 @@ func _new_round() -> void:
 		
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 func _on_roll_button_pressed() -> void:
 	roll.emit()
@@ -128,6 +131,7 @@ func _get_total() -> int:
 	return temp.size()
 	
 func _next_turn() -> int:
+	
 	print("--------")
 	#bot1._showRoll()
 	#bot2._showRoll()
@@ -494,7 +498,7 @@ func _on_bot_4_dead() -> void:
 	alive[4] = false
 
 func _on_player_dead() -> void:
-	pass
+	alive[0] = false
 	
 
 signal decision

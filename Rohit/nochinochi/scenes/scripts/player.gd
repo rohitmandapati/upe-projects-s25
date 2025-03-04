@@ -7,6 +7,9 @@ var dice : int
 #initalizes dice face
 var dice_faces = []
 
+signal player_dead
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void: # Dice faces 1 to 6
@@ -20,9 +23,11 @@ func _ready() -> void: # Dice faces 1 to 6
 	dice = 6
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if dice <= 0:
+		player_dead.emit()
 	
 func _on_level_roll() -> void:
 	_roll(dice)
