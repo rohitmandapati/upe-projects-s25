@@ -214,10 +214,30 @@ func _next_turn() -> int:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot1.boldness_threshold)):
 					var call_result = _call()
+					var text = "Bot 1 calls "
+					if prevTurn == 0:
+						text += "You"
+					else:
+							text += "Bot " + str(prevTurn)
+					info_box.clear()
+					info_box.append_text(text)
+					await get_tree().create_timer(2).timeout
 					if call_result:
 						bot1.dice -= 1
+						text = "Wrong! Bot 1 loses a die"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 					else:
 						players[prevTurn].dice -= 1
+						text = "Correct! "
+						if prevTurn == 0:
+							text += "You lose a die"
+						else:
+							text += "Bot " + str(prevTurn) + " loses a die!"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 					_new_round()
 					return currentTurn
 				else:
@@ -243,10 +263,30 @@ func _next_turn() -> int:
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot2.boldness_threshold)):
+					var text = "Bot 2 calls "
+					if prevTurn == 0:
+						text += "You"
+					else:
+							text += "Bot " + str(prevTurn)
+					info_box.clear()
+					info_box.append_text(text)
+					await get_tree().create_timer(2).timeout
 					var call_result = _call()
 					if call_result:
+						text = "Wrong! Bot 2 loses a die"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 						bot2.dice -= 1
 					else:
+						text = "Correct! "
+						if prevTurn == 0:
+							text += "You lose a die"
+						else:
+							text += "Bot " + str(prevTurn) + " loses a die!"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 						players[prevTurn].dice -= 1
 					_new_round()
 					return currentTurn
@@ -273,10 +313,30 @@ func _next_turn() -> int:
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot3.boldness_threshold)):
+					var text = "Bot 3 calls "
+					if prevTurn == 0:
+						text += "You"
+					else:
+							text += "Bot " + str(prevTurn)
+					info_box.clear()
+					info_box.append_text(text)
+					await get_tree().create_timer(2).timeout
 					var call_result = _call()
 					if call_result:
+						text = "Wrong! Bot 3 loses a die"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 						bot3.dice -= 1
 					else:
+						text = "Correct! "
+						if prevTurn == 0:
+							text += "You lose a die"
+						else:
+							text += "Bot " + str(prevTurn) + " loses a die!"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 						players[prevTurn].dice -= 1
 					_new_round()
 					return currentTurn
@@ -303,10 +363,30 @@ func _next_turn() -> int:
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot4.boldness_threshold)):
+					var text = "Bot 4 calls "
+					if prevTurn == 0:
+						text.append("You!")
+					else:
+						text += "Bot " + str(prevTurn)
+					info_box.clear()
+					info_box.append_text(text)
+					await get_tree().create_timer(2).timeout
 					var call_result = _call()
 					if call_result:
+						text = "Wrong! Bot 4 loses a die"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 						bot4.dice -= 1
 					else:
+						text = "Correct! "
+						if prevTurn == 0:
+							text += "You lose a die"
+						else:
+							text += "Bot " + str(prevTurn) + " loses a die!"
+						info_box.clear()
+						info_box.append_text(text)
+						await get_tree().create_timer(2).timeout
 						players[prevTurn].dice -= 1
 					_new_round()
 					return currentTurn
@@ -377,8 +457,14 @@ func _calculate_chance(num : int) -> float:
 	return out
 	
 func _make_assertion() -> Array: # To be implemented
-	var asserts = [0,0]
+	var asserts = [1, 1]
 	var t = randf()
+	
+	if assertFace < 1:
+		assertFace = 1
+	if assertNum < 1:
+		assertNum = 1
+
 	if t <=0.4: #increase faces
 		var new_face = ceil(randf_range(0.2,1.2))
 		if assertFace + new_face >= 6:
