@@ -1,0 +1,5 @@
+res://scenes/game_start.tscn
+res://scenes/level.tscn
+res://scenes/rulebook-pg1.tscn
+res://scenes/rulebook-pg2.tscn
+res://node_2d.tscn
