@@ -105,26 +105,20 @@ func _on_roll_button_pressed() -> void:
 
 
 func _combine_rolls() -> Array:
-	var player = get_node_or_null("Player")
-	var bot_1 = get_node_or_null("Bot1")
-	var bot_2 = get_node_or_null("Bot2")
-	var bot_3 = get_node_or_null("Bot3")
-	var bot_4 = get_node_or_null("Bot4")
-	
 	var p_roll : Array = []
 	var b_roll : Array = []
 
 	if player:
 		p_roll = player._get_last_roll()
 
-	if bot1 and bot_1:
-		b_roll += bot_1._get_last_roll()
-	if bot2 and bot_2:
-		b_roll += bot_2._get_last_roll()
-	if bot3 and bot_3:
-		b_roll += bot_3._get_last_roll()
-	if bot4 and bot_4:
-		b_roll += bot_4._get_last_roll()
+	if alive[1]:
+		b_roll += bot1._get_last_roll()
+	if alive[2]:
+		b_roll += bot2._get_last_roll()
+	if alive[3]:
+		b_roll += bot3._get_last_roll()
+	if alive[4]:
+		b_roll += bot4._get_last_roll()
 	
 	var combined_roll : Array = p_roll + b_roll
 	return combined_roll
@@ -416,6 +410,7 @@ func _call() -> bool:
 	bot3._showRoll()
 	bot4._showRoll()
 	var rolls : Array = _combine_rolls()
+	print(rolls)
 	var out : bool
 	var count = 0
 	for i in rolls:

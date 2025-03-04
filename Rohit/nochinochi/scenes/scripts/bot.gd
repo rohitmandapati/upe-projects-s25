@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 
 #rolls dice for bot.
 func _botRoll(num_dice: int) -> Array:
-	botResult.clear()
+	botResult = []
 	for i in range(num_dice):
 		botResult.append(randi() % 6 + 1)
 	return botResult 

@@ -36,7 +36,7 @@ func _clear() -> void:
 # Called at the start of the round. Rolls a number of dice and returns the result.
 func _roll(num_dice: int) -> void:
 	_clear()
-
+	result = []
 	#rolls dice and creates visuals
 	for i in range(num_dice):
 		var roll_result = randi() % 6 + 1
