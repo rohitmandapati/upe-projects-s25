@@ -58,28 +58,29 @@ script = ExtResource("12_w8hxi")
 [node name="Bot4" type="Node2D" parent="."]
 script = ExtResource("13_h8gcc")
 
+[node name="GameInfo" type="RichTextLabel" parent="."]
+offset_left = 560.0
+offset_top = 240.0
+offset_right = 1359.0
+offset_bottom = 494.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+horizontal_alignment = 1
+
 [node name="InfoBox" type="RichTextLabel" parent="."]
-offset_left = 266.0
-offset_top = 239.0
-offset_right = 1065.0
-offset_bottom = 493.0
+offset_left = 560.0
+offset_top = 350.0
+offset_right = 1359.0
+offset_bottom = 604.0
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-
-[node name="RollButton" type="Button" parent="."]
-offset_left = 753.0
-offset_top = 448.0
-offset_right = 1178.0
-offset_bottom = 651.0
-theme_override_font_sizes/font_size = 80
-text = "Roll!"
-script = ExtResource("14_qiuuy")
+horizontal_alignment = 1
 
 [node name="OptionButton" type="OptionButton" parent="."]
-offset_left = 1238.0
-offset_top = 485.0
-offset_right = 1408.0
-offset_bottom = 618.0
+offset_left = 982.0
+offset_top = 482.0
+offset_right = 1152.0
+offset_bottom = 615.0
 theme_override_font_sizes/font_size = 50
 alignment = 1
 allow_reselect = true
@@ -98,58 +99,67 @@ popup/item_5/text = "6"
 popup/item_5/id = 5
 
 [node name="DiceSide" type="RichTextLabel" parent="."]
-offset_left = 1243.0
-offset_top = 444.0
-offset_right = 1412.0
-offset_bottom = 502.0
+offset_left = 987.0
+offset_top = 441.0
+offset_right = 1156.0
+offset_bottom = 499.0
 theme_override_font_sizes/normal_font_size = 36
 text = "Dice Side"
 text_direction = 3
 
 [node name="Invalid" type="RichTextLabel" parent="."]
-offset_left = 1141.0
-offset_top = 750.0
-offset_right = 1310.0
-offset_bottom = 808.0
+offset_left = 791.0
+offset_top = 743.0
+offset_right = 1144.0
+offset_bottom = 831.0
 theme_override_font_sizes/normal_font_size = 36
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
-text = "[center][b]Invalid[/b][/center]"
+text = "[center][b]Invalid Entry Detected! Please Try Again.[/b][/center]"
 text_direction = 3
 
 [node name="SpinBox" type="SpinBox" parent="."]
-offset_left = 1035.0
-offset_top = 485.0
-offset_right = 1228.0
-offset_bottom = 619.0
+offset_left = 779.0
+offset_top = 482.0
+offset_right = 972.0
+offset_bottom = 616.0
 min_value = 1.0
 max_value = 36.0
 value = 1.0
 
 [node name="Amount" type="RichTextLabel" parent="."]
-offset_left = 1049.0
-offset_top = 444.0
-offset_right = 1218.0
-offset_bottom = 502.0
+offset_left = 793.0
+offset_top = 441.0
+offset_right = 962.0
+offset_bottom = 499.0
 theme_override_font_sizes/normal_font_size = 36
 text = "Amount"
 text_direction = 3
 
 [node name="Confirm" type="Button" parent="."]
-offset_left = 1087.0
-offset_top = 633.0
-offset_right = 1357.0
-offset_bottom = 724.0
+offset_left = 831.0
+offset_top = 630.0
+offset_right = 1101.0
+offset_bottom = 721.0
 theme_override_font_sizes/font_size = 60
 text = "Confirm"
 
 [node name="CallButton" type="Button" parent="."]
-offset_left = 555.0
-offset_top = 539.0
-offset_right = 980.0
-offset_bottom = 687.0
+offset_left = 1411.0
+offset_top = 852.0
+offset_right = 1836.0
+offset_bottom = 1000.0
 theme_override_font_sizes/font_size = 80
 text = "Liar!"
+
+[node name="RollButton" type="Button" parent="."]
+offset_left = 753.0
+offset_top = 448.0
+offset_right = 1178.0
+offset_bottom = 651.0
+theme_override_font_sizes/font_size = 80
+text = "Roll!"
+script = ExtResource("14_qiuuy")
 
 [node name="CurrentDiceFace" type="RichTextLabel" parent="."]
 visible = false
@@ -184,8 +194,8 @@ bbcode_enabled = true
 [connection signal="bot_2_dead" from="Bot2" to="." method="_on_bot_2_dead"]
 [connection signal="bot_3_dead" from="Bot3" to="." method="_on_bot_3_dead"]
 [connection signal="bot_4_dead" from="Bot4" to="." method="_on_bot_4_dead"]
+[connection signal="pressed" from="Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="CallButton" to="." method="_on_call_button_pressed"]
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="RollButton" to="Bot1" method="_on_roll_button_pressed"]
 [connection signal="pressed" from="RollButton" to="RollButton" method="_on_pressed"]
-[connection signal="pressed" from="Confirm" to="." method="_on_confirm_pressed"]
-[connection signal="pressed" from="CallButton" to="." method="_on_call_button_pressed"]

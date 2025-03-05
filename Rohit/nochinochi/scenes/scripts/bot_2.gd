@@ -71,3 +71,6 @@ func _on_level_roll() -> void:
 	if level.alive[2]: #Differs from bot to bot
 		_botRoll(dice)
 		#_showRoll()
+		
+func _dice() -> int:
+	return dice

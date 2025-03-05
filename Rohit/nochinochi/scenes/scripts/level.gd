@@ -9,6 +9,7 @@ signal assertion_made
 @onready var prevTurn : int = 4
 @onready var currentTurn : int = -1
 @onready var players_left = 5
+@onready var total_dice = 30
 
 # Player and Bot references
 @onready var player = $Player
@@ -31,6 +32,8 @@ signal assertion_made
 @onready var call_button = $CallButton
 @onready var roll_button = $RollButton
 @onready var info_box = $InfoBox
+@onready var game_info = $GameInfo
+
 # Turn display references
 @onready var player_turn = $PlayerTurn
 @onready var bot1_turn = $Bot1Turn
@@ -44,7 +47,6 @@ signal assertion_made
 @onready var assertFaceLabel = $CurrentDiceFace
 @onready var assertNumLabel = $CurrentDIceNum
 
-	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,6 +58,8 @@ func _ready() -> void:
 	#invalid_label.visible = false
 	#call_button.visible = false
 	callable = false
+	if Global.difficulty != 0:
+		game_info.append_text("Players: %d | Total Dice: %d" % [players_left, total_dice])
 	_new_round()
 	
 
@@ -69,6 +73,8 @@ func _process(delta : float) -> void:
 
 
 func _new_round() -> void:
+	if Global.difficulty == 0:
+		_game_state()
 	assertFaceLabel.clear()
 	assertNumLabel.clear()
 	player_turn.visible = false
@@ -90,15 +96,15 @@ func _new_round() -> void:
 	#assertNum = 0
 	await roll
 	roll_button.visible = false
-	
+	if Global.difficulty != 0:
+		game_info.clear()
+
 	print(bot1.boldness_threshold)
 	print(bot2.boldness_threshold)
 	print(bot3.boldness_threshold)
 	print(bot4.boldness_threshold)
 	#await get_tree().create_timer(2).timeout 
 	_next_turn()
-		
-
 
 
 func _on_roll_button_pressed() -> void:
@@ -114,17 +120,21 @@ func _combine_rolls() -> Array:
 	if player:
 		p_roll = player._get_last_roll()
 
-	if alive[1]:
-		b_roll += bot1._get_last_roll()
-	if alive[2]:
-		b_roll += bot2._get_last_roll()
-	if alive[3]:
-		b_roll += bot3._get_last_roll()
-	if alive[4]:
-		b_roll += bot4._get_last_roll()
-	
-	var combined_roll : Array = p_roll + b_roll
-	return combined_roll
+	for i in range(1, 5):
+		if alive[i]:
+			b_roll += get_node("Bot" + str(i))._get_last_roll()
+
+	return p_roll + b_roll
+
+func _game_state():
+	game_info.clear()
+	players_left = 1
+	total_dice = player._dice()
+	for i in range(1, 5):
+		if alive[i]:
+			players_left += 1
+			total_dice += get_node("Bot" + str(i))._dice()
+	game_info.append_text("Players: %d | Total Dice: %d" % [players_left, total_dice])
 	
 func _get_total() -> int:
 	var temp : Array = _combine_rolls()

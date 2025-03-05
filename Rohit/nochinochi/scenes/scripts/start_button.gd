@@ -2,6 +2,7 @@ extends Button
 
 var difficulty: int = -1
 
+
 signal difficulty_easy
 signal difficulty_medium
 signal difficulty_hard
@@ -31,3 +32,4 @@ func _on_pressed() -> void:
 
 func _on_difficulty_item_selected(index: int) -> void:
 	difficulty = index 
+	Global.difficulty = index

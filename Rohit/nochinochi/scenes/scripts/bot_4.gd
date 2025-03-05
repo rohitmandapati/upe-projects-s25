@@ -72,3 +72,7 @@ func _on_level_roll() -> void:
 		print("go")
 		_botRoll(dice)
 		#_showRoll()
+		
+		
+func _dice() -> int:
+	return dice

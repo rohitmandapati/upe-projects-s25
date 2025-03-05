@@ -56,3 +56,6 @@ func _roll(num_dice: int) -> void:
 func _get_last_roll() -> Array:
 	return result
 	
+	
+func _dice() -> int:
+	return dice
