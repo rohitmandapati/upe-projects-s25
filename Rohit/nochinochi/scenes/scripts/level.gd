@@ -507,19 +507,29 @@ func _make_assertion() -> Array: # To be implemented
 
 func _on_bot_1_dead() -> void:
 	alive[1] = false
-
+	players_left -= 1
+	info_box.clear()
+	info_box.append_text("Bot 1 has lost")
 func _on_bot_2_dead() -> void:
 	alive[2] = false
-
+	players_left -= 1
+	info_box.clear()
+	info_box.append_text("Bot 2 has lost")
 func _on_bot_3_dead() -> void:
 	alive[3] = false
-
+	players_left -= 1
+	info_box.clear()
+	info_box.append_text("Bot 3 has lost")
 func _on_bot_4_dead() -> void:
+	players_left -= 1
 	alive[4] = false
-
+	info_box.clear()
+	info_box.append_text("Bot 4 has lost")
 func _on_player_dead() -> void:
 	alive[0] = false
-	
+	players_left -= 1
+	info_box.clear()
+	info_box.append_text("You have lost")
 
 signal decision
 var player_call : bool

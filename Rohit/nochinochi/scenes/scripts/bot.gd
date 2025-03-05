@@ -18,7 +18,7 @@ var bot_dice_faces = []
 var boldness_threshold : float
 
 func _init() -> void:
-	dice = 6
+	dice = 2
 	var init : float = randf_range(0.0, 1.0)
 	boldness_threshold = -1.0 / (1.0 + pow(2.72,-2*(init-0.5))) + 1.0
 
