@@ -5,6 +5,8 @@ signal bot_2_dead # Differs
 @onready var difficulty = 1
 @onready var level = $".."
 
+var has_emitted: bool = false
+
 #current roll
 var botResult : Array = []
 
@@ -25,14 +27,15 @@ func _ready() -> void: # Dice faces 1 to 6
 	bot_dice_faces.append(load("res://textures/dice-4.png"))
 	bot_dice_faces.append(load("res://textures/dice-5.png"))
 	bot_dice_faces.append(load("res://textures/dice-6.png"))
-	dice = 2
+	dice = 1
 	var init : float = randf_range(0.0, 1.0)
 	boldness_threshold = -1.0 / (1.0 + pow(2.72,-2*(init-0.5))) + 1.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if dice <= 0:
+	if dice <= 0 and not has_emitted:
 		bot_2_dead.emit() #Differs from bot to bot
+		has_emitted = true
 
 
 

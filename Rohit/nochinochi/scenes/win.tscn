@@ -20,10 +20,10 @@ bbcode_enabled = true
 text = "[center]Good job! You won!"
 
 [node name="TryAgain" type="Button" parent="."]
-offset_left = 772.0
-offset_top = 545.0
-offset_right = 1153.0
-offset_bottom = 719.0
+offset_left = 776.0
+offset_top = 500.0
+offset_right = 1157.0
+offset_bottom = 674.0
 theme_override_font_sizes/font_size = 60
 text = "Play Again?"
 script = ExtResource("2_jd8d0")

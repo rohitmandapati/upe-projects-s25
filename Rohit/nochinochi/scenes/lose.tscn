@@ -1,30 +1,31 @@
 [gd_scene load_steps=3 format=3 uid="uid://olivotghm1cf"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_nlb1v"]
-[ext_resource type="Script" uid="uid://6lhakovr3voh" path="res://scenes/scripts/try_button.gd" id="2_klg1u"]
+[ext_resource type="Script" uid="uid://dtjhhrl81b7cg" path="res://scenes/scripts/try_again.gd" id="2_r6nsb"]
 
-[node name="Background" type="Sprite2D"]
-position = Vector2(962.5, 542.5)
-scale = Vector2(3.94512, 3.2346)
+[node name="lose" type="Sprite2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(962, 542.5)
+scale = Vector2(3.94309, 3.22874)
 texture = ExtResource("1_nlb1v")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -51.8362
-offset_top = -38.7992
-offset_right = 51.1638
-offset_bottom = -12.7992
-scale = Vector2(1, 1.3)
-bbcode_enabled = true
-text = "[center]You Lost :(
-"
+offset_left = 528.0
+offset_top = 374.0
+offset_right = 1419.0
+offset_bottom = 511.0
+theme_override_font_sizes/normal_font_size = 80
+text = "It seems like you lost"
+horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
-offset_left = -45.2458
-offset_top = -1.39121
-offset_right = 42.7542
-offset_bottom = 29.6088
-scale = Vector2(1, 1.3)
+[node name="TryAgain" type="Button" parent="."]
+offset_left = 790.0
+offset_top = 503.0
+offset_right = 1171.0
+offset_bottom = 677.0
+theme_override_font_sizes/font_size = 60
 text = "Try Again?"
-script = ExtResource("2_klg1u")
+script = ExtResource("2_r6nsb")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="TryAgain" to="TryAgain" method="_on_pressed"]

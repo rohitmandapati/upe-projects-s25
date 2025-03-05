@@ -8,6 +8,7 @@ signal assertion_made
 
 @onready var prevTurn : int = 4
 @onready var currentTurn : int = -1
+@onready var players_total = 5
 @onready var players_left = 5
 @onready var total_dice = 30
 
@@ -73,8 +74,6 @@ func _process(delta : float) -> void:
 
 
 func _new_round() -> void:
-	if Global.difficulty == 0:
-		_game_state()
 	assertFaceLabel.clear()
 	assertNumLabel.clear()
 	player_turn.visible = false
@@ -96,9 +95,6 @@ func _new_round() -> void:
 	#assertNum = 0
 	await roll
 	roll_button.visible = false
-	if Global.difficulty != 0:
-		game_info.clear()
-
 	print(bot1.boldness_threshold)
 	print(bot2.boldness_threshold)
 	print(bot3.boldness_threshold)
@@ -153,9 +149,14 @@ func _next_turn() -> int:
 	bot2_turn.visible = false
 	bot3_turn.visible = false
 	bot4_turn.visible = false
-	
+
+	if Global.difficulty == 0:
+		_game_state()
+	if Global.difficulty != 0:
+		game_info.clear()
+
 	prevTurn = currentTurn
-	for i in range(players_left):
+	for i in range(players_total):
 		currentTurn += 1
 		@warning_ignore("integer_division")
 		currentTurn %= 5
@@ -509,27 +510,38 @@ func _on_bot_1_dead() -> void:
 	alive[1] = false
 	players_left -= 1
 	info_box.clear()
-	info_box.append_text("Bot 1 has lost")
+	info_box.append_text("Bot 1 has lost!")
+	await get_tree().create_timer(2).timeout
+	info_box.clear()
+
 func _on_bot_2_dead() -> void:
 	alive[2] = false
 	players_left -= 1
 	info_box.clear()
-	info_box.append_text("Bot 2 has lost")
+	info_box.append_text("Bot 2 has lost!")
+	await get_tree().create_timer(2).timeout
+	info_box.clear()
+
 func _on_bot_3_dead() -> void:
 	alive[3] = false
 	players_left -= 1
 	info_box.clear()
-	info_box.append_text("Bot 3 has lost")
+	info_box.append_text("Bot 1 has lost!")
+	await get_tree().create_timer(2).timeout
+	info_box.clear()
+
 func _on_bot_4_dead() -> void:
 	players_left -= 1
 	alive[4] = false
 	info_box.clear()
-	info_box.append_text("Bot 4 has lost")
+	info_box.append_text("Bot 1 has lost!")
+	await get_tree().create_timer(2).timeout
+	info_box.clear()
+
 func _on_player_dead() -> void:
 	alive[0] = false
 	players_left -= 1
-	info_box.clear()
-	info_box.append_text("You have lost")
+
 
 signal decision
 var player_call : bool

@@ -20,7 +20,7 @@ func _ready() -> void: # Dice faces 1 to 6
 	dice_faces.append(load("res://textures/dice-5.png"))
 	dice_faces.append(load("res://textures/dice-6.png"))
 	
-	dice = 2
+	dice = 1
 
 
 
