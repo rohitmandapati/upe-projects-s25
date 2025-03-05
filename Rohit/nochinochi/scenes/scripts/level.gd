@@ -170,10 +170,16 @@ func _next_turn() -> int:
 			bot2._showRoll()
 			bot3._showRoll()
 			bot4._showRoll()
-			var text = "You called Bot " + str(prevTurn)
+			var text = "You called Bot " + str(prevTurn) + " a liar!"
 			info_box.clear()
 			info_box.append_text(text)
 			var out = _call()
+			call_button.visible = false
+			dice_side.visible = false
+			num_dice.visible = false
+			confirm.visible = false
+			dice_side_label.visible = false
+			num_dice_label.visible = false
 			await get_tree().create_timer(2).timeout
 			if out:
 				player.dice -= 1
@@ -191,7 +197,7 @@ func _next_turn() -> int:
 		elif player_assert:
 			assertNum = num_dice.value
 			assertFace = dice_side.get_selected_id() + 1
-			var text = "You say there are " + str(assertNum) + " dice of face " + str(assertFace)
+			var text = "You bid " + str(assertNum) + " dice of face " + str(assertFace) + "."
 			info_box.clear()
 			info_box.append_text(text)
 			assertion_made.emit()
@@ -206,17 +212,18 @@ func _next_turn() -> int:
 		invalid_label.visible = false 
 		if currentTurn == 1:
 			print("Bot 1 Turn")
-			bot1_turn.visible = true
 			await get_tree().create_timer(2).timeout
+			bot1_turn.visible = true
+			await get_tree().create_timer(1).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot1.boldness_threshold)):
 					var call_result = _call()
-					var text = "Bot 1 calls "
+					var text = "Bot 1 thinks "
 					if prevTurn == 0:
-						text += "you"
+						text += "you are a liar!"
 					else:
-						text += "Bot " + str(prevTurn)
+						text += "Bot " + str(prevTurn) + " is a liar!"
 					info_box.clear()
 					info_box.append_text(text)
 					await get_tree().create_timer(2).timeout
@@ -232,7 +239,7 @@ func _next_turn() -> int:
 						if prevTurn == 0:
 							text += "You lose a die"
 						else:
-							text += "Bot " + str(prevTurn) + " loses a die!"
+							text += "Bot " + str(prevTurn) + " loses a die"
 						info_box.clear()
 						info_box.append_text(text)
 						await get_tree().create_timer(2).timeout
@@ -242,7 +249,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 1 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+					var text = "Bot 1 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -250,22 +257,23 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 1 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+				var text = "Bot 1 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()
 		if currentTurn == 2:
 			print("Bot 2 Turn")
-			bot2_turn.visible = true
 			await get_tree().create_timer(2).timeout
+			bot2_turn.visible = true
+			await get_tree().create_timer(1).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot2.boldness_threshold)):
-					var text = "Bot 2 calls "
+					var text = "Bot 2 thinks "
 					if prevTurn == 0:
-						text += "you"
+						text += "you are a liar!"
 					else:
-							text += "Bot " + str(prevTurn)
+							text += "Bot " + str(prevTurn) + " is a liar!"
 					info_box.clear()
 					info_box.append_text(text)
 					await get_tree().create_timer(2).timeout
@@ -281,7 +289,7 @@ func _next_turn() -> int:
 						if prevTurn == 0:
 							text += "You lose a die"
 						else:
-							text += "Bot " + str(prevTurn) + " loses a die!"
+							text += "Bot " + str(prevTurn) + " loses a die"
 						info_box.clear()
 						info_box.append_text(text)
 						await get_tree().create_timer(2).timeout
@@ -292,7 +300,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 2 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+					var text = "Bot 2 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -300,22 +308,23 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 2 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+				var text = "Bot 2 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()
 		if currentTurn == 3:
 			print("Bot 3 Turn")
-			bot3_turn.visible = true
 			await get_tree().create_timer(2).timeout
+			bot3_turn.visible = true
+			await get_tree().create_timer(1).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot3.boldness_threshold)):
-					var text = "Bot 3 calls "
+					var text = "Bot 3 thinks "
 					if prevTurn == 0:
-						text += "You"
+						text += "you are a liar!"
 					else:
-							text += "Bot " + str(prevTurn)
+							text += "Bot " + str(prevTurn) + " is a liar!"
 					info_box.clear()
 					info_box.append_text(text)
 					await get_tree().create_timer(2).timeout
@@ -331,7 +340,7 @@ func _next_turn() -> int:
 						if prevTurn == 0:
 							text += "You lose a die"
 						else:
-							text += "Bot " + str(prevTurn) + " loses a die!"
+							text += "Bot " + str(prevTurn) + " loses a die"
 						info_box.clear()
 						info_box.append_text(text)
 						await get_tree().create_timer(2).timeout
@@ -342,7 +351,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 3 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+					var text = "Bot 3 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -350,22 +359,23 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 3 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+				var text = "Bot 3 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()
 		if currentTurn == 4:
 			print("Bot 4 Turn")
-			bot4_turn.visible = true
 			await get_tree().create_timer(2).timeout
+			bot4_turn.visible = true
+			await get_tree().create_timer(1).timeout
 			if callable:
 				var chance = _calculate_chance(assertNum)
 				if (chance < (1 - bot4.boldness_threshold)):
-					var text = "Bot 4 calls "
+					var text = "Bot 4 thinks "
 					if prevTurn == 0:
-						text.append("You!")
+						text.append("you are a liar!")
 					else:
-						text += "Bot " + str(prevTurn)
+						text += "Bot " + str(prevTurn) + " is a liar!"
 					info_box.clear()
 					info_box.append_text(text)
 					await get_tree().create_timer(2).timeout
@@ -381,7 +391,7 @@ func _next_turn() -> int:
 						if prevTurn == 0:
 							text += "You lose a die"
 						else:
-							text += "Bot " + str(prevTurn) + " loses a die!"
+							text += "Bot " + str(prevTurn) + " loses a die"
 						info_box.clear()
 						info_box.append_text(text)
 						await get_tree().create_timer(2).timeout
@@ -392,7 +402,7 @@ func _next_turn() -> int:
 					var assertions : Array = _make_assertion()
 					assertFace = assertions[0]
 					assertNum = assertions[1]
-					var text = "Bot 4 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+					var text = "Bot 4 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 					info_box.clear()
 					info_box.append_text(text)
 					assertion_made.emit()
@@ -400,7 +410,7 @@ func _next_turn() -> int:
 				var assertions : Array = _make_assertion()
 				assertFace = assertions[0]
 				assertNum = assertions[1]
-				var text = "Bot 4 says there are " + str(assertNum) + " dice with face " + str(assertFace)
+				var text = "Bot 4 bids " + str(assertNum) + " dice with face " + str(assertFace) + "."
 				info_box.clear()
 				info_box.append_text(text)
 				assertion_made.emit()

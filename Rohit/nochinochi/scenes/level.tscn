@@ -14,7 +14,7 @@
 script = ExtResource("1_f614b")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(962.74, 542.77)
+position = Vector2(968, 541)
 scale = Vector2(3.95228, 3.23889)
 texture = ExtResource("1_ypw4k")
 
@@ -67,19 +67,19 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 
 [node name="RollButton" type="Button" parent="."]
-offset_left = 555.0
-offset_top = 329.0
-offset_right = 980.0
-offset_bottom = 532.0
+offset_left = 753.0
+offset_top = 448.0
+offset_right = 1178.0
+offset_bottom = 651.0
 theme_override_font_sizes/font_size = 80
 text = "Roll!"
 script = ExtResource("14_qiuuy")
 
 [node name="OptionButton" type="OptionButton" parent="."]
-offset_left = 1039.0
-offset_top = 486.0
-offset_right = 1209.0
-offset_bottom = 619.0
+offset_left = 1238.0
+offset_top = 485.0
+offset_right = 1408.0
+offset_bottom = 618.0
 theme_override_font_sizes/font_size = 50
 alignment = 1
 allow_reselect = true
@@ -98,10 +98,10 @@ popup/item_5/text = "6"
 popup/item_5/id = 5
 
 [node name="DiceSide" type="RichTextLabel" parent="."]
-offset_left = 1043.0
-offset_top = 445.0
-offset_right = 1212.0
-offset_bottom = 503.0
+offset_left = 1243.0
+offset_top = 444.0
+offset_right = 1412.0
+offset_bottom = 502.0
 theme_override_font_sizes/normal_font_size = 36
 text = "Dice Side"
 text_direction = 3
@@ -118,19 +118,19 @@ text = "[center][b]Invalid[/b][/center]"
 text_direction = 3
 
 [node name="SpinBox" type="SpinBox" parent="."]
-offset_left = 1232.0
-offset_top = 484.0
-offset_right = 1425.0
-offset_bottom = 618.0
+offset_left = 1035.0
+offset_top = 485.0
+offset_right = 1228.0
+offset_bottom = 619.0
 min_value = 1.0
 max_value = 36.0
 value = 1.0
 
 [node name="Amount" type="RichTextLabel" parent="."]
-offset_left = 1248.0
-offset_top = 443.0
-offset_right = 1417.0
-offset_bottom = 501.0
+offset_left = 1049.0
+offset_top = 444.0
+offset_right = 1218.0
+offset_bottom = 502.0
 theme_override_font_sizes/normal_font_size = 36
 text = "Amount"
 text_direction = 3
@@ -149,22 +149,24 @@ offset_top = 539.0
 offset_right = 980.0
 offset_bottom = 687.0
 theme_override_font_sizes/font_size = 80
-text = "Call!"
+text = "Liar!"
 
 [node name="CurrentDiceFace" type="RichTextLabel" parent="."]
-offset_left = 1040.0
-offset_top = 313.0
-offset_right = 1207.0
-offset_bottom = 433.0
+visible = false
+offset_left = 1240.0
+offset_top = 340.0
+offset_right = 1407.0
+offset_bottom = 460.0
 theme_override_font_sizes/normal_font_size = 56
 theme_override_font_sizes/bold_font_size = 56
 bbcode_enabled = true
 
 [node name="CurrentDIceNum" type="RichTextLabel" parent="."]
-offset_left = 1231.0
-offset_top = 313.0
-offset_right = 1408.0
-offset_bottom = 432.0
+visible = false
+offset_left = 1040.0
+offset_top = 340.0
+offset_right = 1217.0
+offset_bottom = 459.0
 theme_override_font_sizes/normal_font_size = 56
 theme_override_font_sizes/bold_font_size = 56
 bbcode_enabled = true

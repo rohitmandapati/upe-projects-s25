@@ -13,15 +13,15 @@ size_flags_vertical = 3
 script = ExtResource("1_rekux")
 
 [node name="RulebookNochiNochi" type="Sprite2D" parent="."]
-position = Vector2(956, 1103)
-scale = Vector2(1.16022, 1.15947)
+position = Vector2(959.749, 842)
+scale = Vector2(1.16113, 1.15947)
 texture = ExtResource("2_50kca")
 
 [node name="Button" type="Button" parent="RulebookNochiNochi"]
-offset_left = 664.53
-offset_top = -87.9709
-offset_right = 797.53
-offset_bottom = -40.9709
+offset_left = 640.0
+offset_top = 115.0
+offset_right = 773.0
+offset_bottom = 162.0
 theme_override_font_sizes/font_size = 21
 text = "Next Page"
 

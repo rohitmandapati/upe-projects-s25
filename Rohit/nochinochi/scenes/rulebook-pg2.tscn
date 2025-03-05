@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5vr35ng8hc34"]
 
 [ext_resource type="Script" uid="uid://jennw5trqlei" path="res://scenes/scripts/rulebook_pg_2.gd" id="1_e1u2u"]
-[ext_resource type="Texture2D" uid="uid://betqydf3bgjx3" path="res://textures/rulebook-1.png" id="2_1m1sx"]
+[ext_resource type="Texture2D" uid="uid://dala83teg8drj" path="res://textures/rulebook-2.png" id="2_1m1sx"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,15 +13,15 @@ grow_vertical = 2
 script = ExtResource("1_e1u2u")
 
 [node name="RulebookNochiNochi" type="Sprite2D" parent="."]
-position = Vector2(961, 42)
+position = Vector2(960, 1234)
 scale = Vector2(1.16052, 1.16052)
 texture = ExtResource("2_1m1sx")
 
 [node name="Button" type="Button" parent="RulebookNochiNochi"]
-offset_left = 664.357
-offset_top = 827.215
-offset_right = 797.357
-offset_bottom = 874.215
+offset_left = 640.0
+offset_top = -220.0
+offset_right = 773.0
+offset_bottom = -173.0
 theme_override_font_sizes/font_size = 21
 text = "Back"
 

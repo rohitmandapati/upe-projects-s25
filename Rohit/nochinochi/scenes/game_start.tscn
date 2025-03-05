@@ -29,7 +29,7 @@ theme_override_font_sizes/bold_italics_font_size = 10
 theme_override_font_sizes/normal_font_size = 100
 theme_override_font_sizes/bold_font_size = 100
 bbcode_enabled = true
-text = "Welcome to [b]Nochi Nochi![/b]
+text = "Welcome to [b]Liar's Dice![/b]
 "
 fit_content = true
 scroll_active = false
