@@ -26,7 +26,7 @@ func _ready() -> void: # Dice faces 1 to 6
 	bot_dice_faces.append(load("res://textures/dice-4.png"))
 	bot_dice_faces.append(load("res://textures/dice-5.png"))
 	bot_dice_faces.append(load("res://textures/dice-6.png"))
-	dice = 1
+	dice = 6
 	var init : float = randf_range(0.0, 1.0)
 	boldness_threshold = -1.0 / (1.0 + pow(2.72,-2*(init-0.5))) + 1.0
 

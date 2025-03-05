@@ -526,7 +526,7 @@ func _on_bot_3_dead() -> void:
 	alive[3] = false
 	players_left -= 1
 	info_box.clear()
-	info_box.append_text("Bot 1 has lost!")
+	info_box.append_text("Bot 3 has lost!")
 	await get_tree().create_timer(2).timeout
 	info_box.clear()
 
@@ -534,7 +534,7 @@ func _on_bot_4_dead() -> void:
 	players_left -= 1
 	alive[4] = false
 	info_box.clear()
-	info_box.append_text("Bot 1 has lost!")
+	info_box.append_text("Bot 4 has lost!")
 	await get_tree().create_timer(2).timeout
 	info_box.clear()
 
