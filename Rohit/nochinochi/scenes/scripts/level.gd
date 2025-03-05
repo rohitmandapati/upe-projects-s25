@@ -59,7 +59,7 @@ func _ready() -> void:
 	#call_button.visible = false
 	callable = false
 	if Global.difficulty != 0:
-		game_info.append_text("Players: %d | Total Dice: %d" % [players_left, total_dice])
+		_game_state()
 	_new_round()
 	
 
