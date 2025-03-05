@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwrdjotudepbp"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_26mgb"]
-[ext_resource type="Script" path="res://scenes/scripts/try_again.gd" id="2_jd8d0"]
+[ext_resource type="Script" uid="uid://dtjhhrl81b7cg" path="res://scenes/scripts/try_again.gd" id="2_jd8d0"]
 
 [node name="win" type="Node2D"]
 

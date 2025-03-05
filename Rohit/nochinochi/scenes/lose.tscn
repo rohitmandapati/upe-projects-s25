@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://olivotghm1cf"]
 
 [ext_resource type="Texture2D" uid="uid://bm3w5v3o00t11" path="res://textures/background.png" id="1_nlb1v"]
-[ext_resource type="Script" path="res://scenes/scripts/try_button.gd" id="2_klg1u"]
+[ext_resource type="Script" uid="uid://6lhakovr3voh" path="res://scenes/scripts/try_button.gd" id="2_klg1u"]
 
 [node name="Background" type="Sprite2D"]
 position = Vector2(962.5, 542.5)
